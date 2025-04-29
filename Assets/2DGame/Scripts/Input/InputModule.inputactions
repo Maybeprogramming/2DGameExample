@@ -1,5 +1,5 @@
 {
-    "name": "InputControls",
+    "name": "InputModule",
     "maps": [
         {
             "name": "Player",
@@ -45,7 +45,7 @@
                     "name": "Run",
                     "type": "Value",
                     "id": "32c870b0-931e-456a-8672-cc2cd9673f1d",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -64,7 +64,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
+                    "name": "Up",
                     "id": "16e1839b-4a90-4fe0-a456-77f6245af81f",
                     "path": "<Keyboard>/w",
                     "interactions": "",
@@ -75,7 +75,7 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "down",
+                    "name": "Down",
                     "id": "e37b3311-a553-43ca-8792-5bd09575c94d",
                     "path": "<Keyboard>/s",
                     "interactions": "",
@@ -86,8 +86,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "left",
-                    "id": "2d1e685f-b915-4d63-b5d0-5bc3572ffd94",
+                    "name": "Left",
+                    "id": "89b64788-53a4-420f-882c-a4770d362869",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -97,8 +97,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "f5f601fb-2e29-419c-9ed8-9ebce403753f",
+                    "name": "Right",
+                    "id": "3b8b741a-2951-4335-89b2-b40a78f182d4",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -249,14 +249,47 @@
                     "action": "HeavyAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "f2aeb9e2-32bf-4f78-bd3d-700e9635fe71",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "2ba068d4-b305-4af9-a6d0-3d3ce50889f7",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Positive",
+                    "id": "e45cf8d1-e3d3-4949-bd08-d09fe2651a0f",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
     ],
     "controlSchemes": [
         {
-            "name": "KeybordAndMouse",
-            "bindingGroup": "KeybordAndMouse",
+            "name": "KeyboardAndMouse",
+            "bindingGroup": "KeyboardAndMouse",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
@@ -265,6 +298,17 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "GamePad",
+            "bindingGroup": "GamePad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }
