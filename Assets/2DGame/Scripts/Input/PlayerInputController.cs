@@ -1,78 +1,69 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
-    private InputModule _inputs;
+    private InputModule _input;
+    
+    public Vector2 Direction { get; private set; }
 
-    [SerializeField] private Animator _animator;
-    [SerializeField] private bool isRun = false;
-    [SerializeField] private bool isJump = false;
-    [SerializeField] private bool isWalk = false;
+    public Action Attacked;
+    public Action HeavyAttacked;
+    public Action Jumped;
+    public Action Walking;
 
     private void Awake()
     {
-        _inputs = new InputModule();
-        Debug.Log(_inputs == null);
-        Debug.Log(_inputs.Player.Attack);
+        _input = new InputModule();
+    }
+
+    private void Update()
+    {
+        Direction = _input.Player.Walk.ReadValue<Vector2>();
     }
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-        Debug.Log($"Атака");
-        _animator.SetTrigger("OnAttack");
+        Attacked?.Invoke();
     }
 
     private void OnEnable()
     {
-        _inputs.Enable();
-        _inputs.Player.Walk.performed += OnWalking;
-        _inputs.Player.Attack.performed += OnAttack;
-        _inputs.Player.Jump.performed += OnJump;
-        _inputs.Player.HeavyAttack.performed += OnHeavyAttack;
-        _inputs.Player.Run.performed += OnRunnig;
-    }
-
-    private void OnRunnig(InputAction.CallbackContext context)
-    {
-        Debug.Log($"Бег {context.ReadValue<float>()}");
-
-        isRun = !isRun;
-        _animator.SetBool("isRun", isRun);
-    }
-
-    private void OnJump(InputAction.CallbackContext context)
-    {
-        Debug.Log($"Прыжок");
-        isJump = !isJump;
-
-        if (isJump)
-        {
-            _animator.SetTrigger("OnJump");
-        }
-        else
-        {
-            _animator.SetTrigger("OnGround");
-        }
-    }
-
-    private void OnHeavyAttack(InputAction.CallbackContext context)
-    {
-        Debug.Log($"Мега Атака");
-        _animator.SetTrigger("OnHeavyAttack");
+        _input.Enable();
+        _input.Player.Attack.performed += OnAttack;
+        _input.Player.HeavyAttack.performed += OnHeavyAttack;
+        _input.Player.Jump.performed += OnJump;
+        //_input.Player.Walk.performed += OnWalking;
+        //_input.Player.Run.performed += OnRunnig;
     }
 
     private void OnDisable()
     {
-        _inputs.Player.Walk.performed -= OnWalking;
-        _inputs.Player.Attack.performed -= OnAttack;
-        _inputs.Disable();
+        _input.Player.Attack.performed -= OnAttack;
+        _input.Player.HeavyAttack.performed -= OnHeavyAttack;
+        _input.Player.Jump.performed -= OnJump;
+        //_input.Player.Walk.performed -= OnWalking;
+        //_input.Player.Run.performed -= OnRunnig;
+        _input.Disable();
     }
 
-    private void OnWalking(InputAction.CallbackContext context)
+    private void OnJump(InputAction.CallbackContext context)
     {
-        Debug.Log("Ходьба");
-        isWalk = !isWalk;
-        _animator.SetBool("isWalk", isWalk);
+        Jumped?.Invoke();
     }
+
+    private void OnHeavyAttack(InputAction.CallbackContext context)
+    {
+        HeavyAttacked?.Invoke();
+    }
+
+    //private void OnRunnig(InputAction.CallbackContext context)
+    //{
+    //}
+
+    //private void OnWalking(InputAction.CallbackContext context)
+    //{
+    //    Walking?.Invoke();
+    //}
 }

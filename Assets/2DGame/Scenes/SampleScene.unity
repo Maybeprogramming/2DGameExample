@@ -1951,7 +1951,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1013189867}
-  - component: {fileID: 1013189866}
   m_Layer: 0
   m_Name: InputSystem
   m_TagString: Untagged
@@ -1959,22 +1958,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1013189866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1013189865}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f60a6989b7496545b44230c316d53e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 2146776894}
-  isRun: 0
-  isJump: 0
-  isWalk: 0
 --- !u!4 &1013189867
 Transform:
   m_ObjectHideFlags: 0
@@ -2021,6 +2004,37 @@ Transform:
   m_Children:
   - {fileID: 3321754}
   m_Father: {fileID: 387745509}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1272724379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1272724380}
+  m_Layer: 0
+  m_Name: GroundDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1272724380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272724379}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -2.4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2146776893}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1279284223
 GameObject:
@@ -3187,6 +3201,11 @@ GameObject:
   - component: {fileID: 2146776894}
   - component: {fileID: 2146776895}
   - component: {fileID: 2146776896}
+  - component: {fileID: 2146776898}
+  - component: {fileID: 2146776897}
+  - component: {fileID: 2146776899}
+  - component: {fileID: 2146776900}
+  - component: {fileID: 2146776901}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3205,7 +3224,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.62, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 88267822}
   - {fileID: 423508966}
@@ -3213,6 +3232,7 @@ Transform:
   - {fileID: 1770425502}
   - {fileID: 1590742644}
   - {fileID: 1854485729}
+  - {fileID: 1272724380}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2146776894
@@ -3298,6 +3318,81 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0049921274, y: -0.2346344}
   m_Size: {x: 1.3886163, y: 4.3447914}
   m_Direction: 0
+--- !u!114 &2146776897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146776892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67e09dac5cf1a7e48a4c9c0325900de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 2146776894}
+  _groundDetector: {fileID: 2146776901}
+  _playerInputController: {fileID: 2146776899}
+--- !u!114 &2146776898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146776892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cfd4cace81b3524c9060581ddec4572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerInputController: {fileID: 2146776899}
+  _rigidbody: {fileID: 0}
+  _flipperX: {fileID: 2146776900}
+  _groundDetector: {fileID: 0}
+  _walkSpeed: 5
+  _runSpeed: 8
+  _jumpForce: 450
+--- !u!114 &2146776899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146776892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f60a6989b7496545b44230c316d53e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2146776900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146776892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c7850746c21eb942ab295886865139c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2146776901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146776892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be0a93faa00ede446a8b13537fcaf598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _grounDetecor: {fileID: 1272724380}
+  _radiusDetection: 0.2
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
