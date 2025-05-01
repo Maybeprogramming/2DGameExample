@@ -9,6 +9,7 @@ public class CharacterAnimation : MonoBehaviour
     private const string Run = "isRun";
     private const string Walk = "isWalk";
     private const string Ground = "OnGround";
+    private const string IsGround = "isGround";
 
     [SerializeField] private Animator _animator;
     [SerializeField] private GroundDetector _groundDetector;
@@ -17,6 +18,8 @@ public class CharacterAnimation : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
+        _playerInputController = GetComponent<PlayerInputController>();
+        _groundDetector = GetComponent<GroundDetector>();
     }
 
     private void OnEnable()
@@ -38,19 +41,14 @@ public class CharacterAnimation : MonoBehaviour
 
     public void OnJump()
     {
+        Debug.Log("Старт анимации прыжка");
+        _animator.SetBool(IsGround, _groundDetector.IsGrounded);
         _animator.SetTrigger(Jump);
     }
 
     public void OnGround()
     {
-        if (_groundDetector.IsGrounded)
-        {
-            _animator.SetTrigger(Ground);
-        }
-        else
-        {
-            _animator.SetTrigger(Jump);
-        }
+        _animator.SetBool(IsGround, _groundDetector.IsGrounded);
     }
 
     public void OnWalking(bool isWalking)
