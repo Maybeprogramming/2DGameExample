@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
 
+[SelectionBase]
 [RequireComponent(typeof(CharacterAnimation), typeof(PlayerInputController), typeof(Rigidbody2D))]
 public class CharacterController : MonoBehaviour
 {
     [SerializeField] private PlayerInputController _playerInputController;
     [SerializeField] private Rigidbody2D _rigidbody;
-    [SerializeField] private FlipperX _flipperX;
-    [SerializeField] private GroundDetector _groundDetector;
+    [SerializeField] private FlipperX _flipperX;    
+    //[SerializeField] private GroundDetector _groundDetector;
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
     [SerializeField] private float _jumpForce;
@@ -17,7 +18,7 @@ public class CharacterController : MonoBehaviour
         _playerInputController = GetComponent<PlayerInputController>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _flipperX = GetComponent<FlipperX>();
-        _groundDetector = GetComponent<GroundDetector>();
+        //_groundDetector = GetComponent<GroundDetector>();
     }
 
     private void OnEnable()
@@ -29,10 +30,10 @@ public class CharacterController : MonoBehaviour
 
     private void OnJump()
     {
-        if (_groundDetector.IsGrounded)
-        {
-            _rigidbody.AddForce(Vector2.up * _jumpForce);
-        }
+        //if (_groundDetector.IsGrounded)
+        //{
+        //    _rigidbody.AddForce(Vector2.up * _jumpForce);
+        //}
     }
 
     private void OnHeavyAttack()

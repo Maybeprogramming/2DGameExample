@@ -1,0 +1,51 @@
+using System.Collections;
+using UnityEngine;
+
+[RequireComponent(typeof(PlayerInputController), typeof(GroundDetector))]
+public class Jumper : MonoBehaviour
+{
+    [SerializeField] private PlayerInputController _controller;
+    [SerializeField] private GroundDetector _detector;
+    [SerializeField] private float _targetTime;
+    [SerializeField] private float _heihtJump;
+
+    private Coroutine _coroutine;
+
+    public Vector2 Position => transform.position;
+
+    private void Start()
+    {
+        _controller = GetComponent<PlayerInputController>();
+        _detector = GetComponent<GroundDetector>();
+    }
+
+    private void OnEnable() =>
+        _controller.Jumped += OnJump;
+
+    private void OnDisable() =>
+        _controller.Jumped -= OnJump;
+
+    private void OnJump()
+    {
+        if (_detector.IsGrounded)
+            _coroutine = StartCoroutine(Jumping(_targetTime));
+    }
+
+    private IEnumerator Jumping(float targetTime)
+    {
+        float timeElapsed = 0f;
+        float currentPosition = Position.y;
+        float maxJumpPosition = currentPosition + Vector2.up.y * _heihtJump;
+        float distance = maxJumpPosition - currentPosition;
+        float currentDistance;
+
+        while (timeElapsed < targetTime)
+        {
+            timeElapsed += Time.deltaTime;
+            currentDistance = timeElapsed / targetTime * distance;
+            transform.position = Vector2.MoveTowards(new Vector2(Position.x, currentPosition), new Vector2(Position.x, maxJumpPosition), currentDistance);
+
+            yield return null;
+        }
+    }
+}

@@ -8,18 +8,23 @@ public class CharacterAnimation : MonoBehaviour
     private const string Jump = "OnJump";
     private const string Run = "isRun";
     private const string Walk = "isWalk";
-    private const string Ground = "OnGround";
+    //private const string Ground = "OnGround";
     private const string IsGround = "isGround";
+    private const string TakeDamage = "TakeDamage";
+    private const string IsDead = "isDead";
+    private const string Dead = "OnDead";
 
     [SerializeField] private Animator _animator;
     [SerializeField] private GroundDetector _groundDetector;
     [SerializeField] private PlayerInputController _playerInputController;
+    [SerializeField] private Health _health;
 
     private void Start()
     {
         _animator = GetComponent<Animator>();
         _playerInputController = GetComponent<PlayerInputController>();
         _groundDetector = GetComponent<GroundDetector>();
+        _health = GetComponent<Health>();
     }
 
     private void OnEnable()
@@ -27,20 +32,34 @@ public class CharacterAnimation : MonoBehaviour
         _playerInputController.Attacked += OnAttack;
         _playerInputController.HeavyAttacked += OnHeavyAttack;
         _playerInputController.Jumped += OnJump;
+        _health.DamageTaking += OnTakeDamage;
+    }
+
+    private void OnTakeDamage()
+    {
+        if (_health.IsAlive)
+            _animator.SetTrigger(TakeDamage);
+        else
+            _animator.SetTrigger(Dead);
     }
 
     public void OnAttack()
     {
-        _animator.SetTrigger(Attack);
+        if (_health.IsAlive)
+            _animator.SetTrigger(Attack);
     }
 
     public void OnHeavyAttack()
     {
-        _animator.SetTrigger(HeavyAttack);
+        if (_health.IsAlive)
+            _animator.SetTrigger(HeavyAttack);
     }
 
     public void OnJump()
     {
+        if (_health.IsAlive == false)
+            return;
+
         Debug.Log("Старт анимации прыжка");
         _animator.SetBool(IsGround, _groundDetector.IsGrounded);
         _animator.SetTrigger(Jump);
@@ -48,24 +67,35 @@ public class CharacterAnimation : MonoBehaviour
 
     public void OnGround()
     {
-        _animator.SetBool(IsGround, _groundDetector.IsGrounded);
+        if (_health.IsAlive)
+            _animator.SetBool(IsGround, _groundDetector.IsGrounded);
     }
 
     public void OnWalking(bool isWalking)
     {
-        if (_playerInputController.Direction.x != 0f)
-        {
-            _animator.SetBool(Walk, true);
-        }
-        else
-        {
-            _animator.SetBool(Walk, false);
-        }
+        //if (_playerInputController.Direction.x != 0f)
+        //{
+        //    _animator.SetBool(Walk, true);
+        //}
+        //else
+        //{
+        //    _animator.SetBool(Walk, false);
+        //}
     }
 
     public void OnRunning(bool isRunning)
     {
-        _animator.SetBool(Run, isRunning);
+        if (_health.IsAlive)
+            _animator.SetBool(Run, isRunning);
+    }
+
+    public void OnDead()
+    {   
+        if(_health.IsAlive == false)
+        {
+            _animator.SetBool(IsDead, !_health.IsAlive);            
+            _animator.SetTrigger(Dead);
+        }
     }
 
     private void Update()
