@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerInputController), typeof(GroundDetector))]
 public class Jumper : MonoBehaviour
@@ -38,13 +39,13 @@ public class Jumper : MonoBehaviour
             StopCoroutine(_coroutine);
     }
 
-    private void OnJump()
+    private void OnJump(InputAction.CallbackContext context)
     {
-        if (_detector.IsGrounded)
-            _coroutine = StartCoroutine(Jumping(_targetTime));
+        if (_detector.IsGrounded && context.action.IsPressed() == true)
+            _coroutine = StartCoroutine(Jumping(_targetTime, context));
     }
 
-    private IEnumerator Jumping(float targetTime)
+    private IEnumerator Jumping(float targetTime, InputAction.CallbackContext context)
     {
         float timeElapsed = 0f;
         float currentPosition = Position.y;
@@ -52,7 +53,7 @@ public class Jumper : MonoBehaviour
         float distance = maxJumpPosition - currentPosition;
         float currentDistance;
 
-        while (timeElapsed < targetTime)
+        while (timeElapsed < targetTime && context.action.IsPressed())
         {
             timeElapsed += Time.deltaTime;
             currentDistance = timeElapsed / targetTime * distance;

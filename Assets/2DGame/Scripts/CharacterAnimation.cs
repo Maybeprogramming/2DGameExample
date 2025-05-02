@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator))]
 public class CharacterAnimation : MonoBehaviour
@@ -66,7 +67,7 @@ public class CharacterAnimation : MonoBehaviour
             _animator.SetTrigger(HeavyAttack);
     }
 
-    public void OnJump()
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (_health.IsAlive == false)
             return;

@@ -10,7 +10,7 @@ public class PlayerInputController : MonoBehaviour
 
     public Action Attacked;
     public Action HeavyAttacked;
-    public Action Jumped;
+    public Action<InputAction.CallbackContext> Jumped;
     public Action Walking;
 
     private void Awake()
@@ -46,7 +46,7 @@ public class PlayerInputController : MonoBehaviour
 
     private void OnJump(InputAction.CallbackContext context)
     {
-        Jumped?.Invoke();
+        Jumped?.Invoke(context);
     }
 
     private void OnHeavyAttack(InputAction.CallbackContext context)
