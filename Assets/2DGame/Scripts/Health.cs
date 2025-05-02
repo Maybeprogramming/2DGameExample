@@ -18,13 +18,4 @@ public class Health : MonoBehaviour
     {
         _health = _health - value > 0 ? _health - value : 0;
     }
-
-    //For Test
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            TakeDamage(1);
-        }
-    }
 }

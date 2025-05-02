@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Animator))]
 public class CharacterAnimation : MonoBehaviour
@@ -7,8 +9,7 @@ public class CharacterAnimation : MonoBehaviour
     private const string HeavyAttack = "OnHeavyAttack";
     private const string Jump = "OnJump";
     private const string Run = "isRun";
-    private const string Walk = "isWalk";
-    //private const string Ground = "OnGround";
+    private const string MoveDirection = "MoveDirection";
     private const string IsGround = "isGround";
     private const string TakeDamage = "TakeDamage";
     private const string IsDead = "isDead";
@@ -18,6 +19,8 @@ public class CharacterAnimation : MonoBehaviour
     [SerializeField] private GroundDetector _groundDetector;
     [SerializeField] private PlayerInputController _playerInputController;
     [SerializeField] private Health _health;
+
+    private float _moveDirection;
 
     private void Start()
     {
@@ -33,6 +36,14 @@ public class CharacterAnimation : MonoBehaviour
         _playerInputController.HeavyAttacked += OnHeavyAttack;
         _playerInputController.Jumped += OnJump;
         _health.DamageTaking += OnTakeDamage;
+    }
+
+    private void OnDisable()
+    {
+        _playerInputController.Attacked -= OnAttack;
+        _playerInputController.HeavyAttacked -= OnHeavyAttack;
+        _playerInputController.Jumped -= OnJump;
+        _health.DamageTaking -= OnTakeDamage;
     }
 
     private void OnTakeDamage()
@@ -71,18 +82,6 @@ public class CharacterAnimation : MonoBehaviour
             _animator.SetBool(IsGround, _groundDetector.IsGrounded);
     }
 
-    public void OnWalking(bool isWalking)
-    {
-        //if (_playerInputController.Direction.x != 0f)
-        //{
-        //    _animator.SetBool(Walk, true);
-        //}
-        //else
-        //{
-        //    _animator.SetBool(Walk, false);
-        //}
-    }
-
     public void OnRunning(bool isRunning)
     {
         if (_health.IsAlive)
@@ -100,6 +99,13 @@ public class CharacterAnimation : MonoBehaviour
 
     private void Update()
     {
+        Moving();
         OnGround();
+    }
+
+    private void Moving()
+    {
+        _moveDirection = Math.Abs(_playerInputController.Direction.x);
+        _animator.SetFloat(MoveDirection, _moveDirection);
     }
 }

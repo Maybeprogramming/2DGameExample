@@ -1,50 +1,51 @@
-using System;
 using UnityEngine;
 
 [SelectionBase]
 [RequireComponent(typeof(CharacterAnimation), typeof(PlayerInputController), typeof(Rigidbody2D))]
-public class CharacterController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [SerializeField] private PlayerInputController _playerInputController;
-    [SerializeField] private Rigidbody2D _rigidbody;
-    [SerializeField] private FlipperX _flipperX;    
-    //[SerializeField] private GroundDetector _groundDetector;
+    [SerializeField] private FlipperX _flipperX;
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private Transform _pointDetectorEnemy;
+    [SerializeField] private float _radiusDetectorEnemy;
+    [SerializeField] private LayerMask _enemyMask;
 
     private void Start()
     {
         _playerInputController = GetComponent<PlayerInputController>();
-        _rigidbody = GetComponent<Rigidbody2D>();
         _flipperX = GetComponent<FlipperX>();
-        //_groundDetector = GetComponent<GroundDetector>();
     }
 
     private void OnEnable()
     {
         _playerInputController.Attacked += OnAttack;
         _playerInputController.HeavyAttacked += OnHeavyAttack;
-        _playerInputController.Jumped += OnJump;
     }
 
-    private void OnJump()
-    {
-        //if (_groundDetector.IsGrounded)
-        //{
-        //    _rigidbody.AddForce(Vector2.up * _jumpForce);
-        //}
-    }
-
+    #region Дубляж!!!! Убрать! ааа!
+    // Дубляж!!!! Убрать! ааа!
     private void OnHeavyAttack()
     {
-
+        Collider2D enemy = Physics2D.OverlapCircle(_pointDetectorEnemy.position, _radiusDetectorEnemy, _enemyMask);
+        enemy.TryGetComponent<Health>(out Health health);
+        health.TakeDamage(4);
     }
 
     private void OnAttack()
     {
-
+        Collider2D enemy = Physics2D.OverlapCircle(_pointDetectorEnemy.position, _radiusDetectorEnemy, _enemyMask);
+        enemy.TryGetComponent<Health>(out Health health);
+        health.TakeDamage(2);
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(_pointDetectorEnemy.position, _radiusDetectorEnemy);
+    }
+    #endregion
 
     private void Update()
     {

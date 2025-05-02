@@ -8,6 +8,7 @@ public class Jumper : MonoBehaviour
     [SerializeField] private GroundDetector _detector;
     [SerializeField] private float _targetTime;
     [SerializeField] private float _heihtJump;
+    [SerializeField] private CeilingDetector _ceilingDetector; //Ссылка на компонент через инспектор! Плохо!
 
     private Coroutine _coroutine;
 
@@ -19,11 +20,23 @@ public class Jumper : MonoBehaviour
         _detector = GetComponent<GroundDetector>();
     }
 
-    private void OnEnable() =>
+    private void OnEnable()
+    {
         _controller.Jumped += OnJump;
+        _ceilingDetector.Detected += OnCeilingDetect;
+    }
 
-    private void OnDisable() =>
+    private void OnDisable()
+    {
         _controller.Jumped -= OnJump;
+        _ceilingDetector.Detected -= OnCeilingDetect;
+    }
+
+    private void OnCeilingDetect()
+    {
+        if (_coroutine != null)
+            StopCoroutine(_coroutine);
+    }
 
     private void OnJump()
     {
@@ -44,6 +57,7 @@ public class Jumper : MonoBehaviour
             timeElapsed += Time.deltaTime;
             currentDistance = timeElapsed / targetTime * distance;
             transform.position = Vector2.MoveTowards(new Vector2(Position.x, currentPosition), new Vector2(Position.x, maxJumpPosition), currentDistance);
+            Debug.Log(timeElapsed);
 
             yield return null;
         }

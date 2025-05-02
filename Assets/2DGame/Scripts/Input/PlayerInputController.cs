@@ -34,8 +34,6 @@ public class PlayerInputController : MonoBehaviour
         _input.Player.Attack.performed += OnAttack;
         _input.Player.HeavyAttack.performed += OnHeavyAttack;
         _input.Player.Jump.performed += OnJump;
-        //_input.Player.Walk.performed += OnWalking;
-        //_input.Player.Run.performed += OnRunnig;
     }
 
     private void OnDisable()
@@ -43,8 +41,6 @@ public class PlayerInputController : MonoBehaviour
         _input.Player.Attack.performed -= OnAttack;
         _input.Player.HeavyAttack.performed -= OnHeavyAttack;
         _input.Player.Jump.performed -= OnJump;
-        //_input.Player.Walk.performed -= OnWalking;
-        //_input.Player.Run.performed -= OnRunnig;
         _input.Disable();
     }
 
@@ -57,13 +53,4 @@ public class PlayerInputController : MonoBehaviour
     {
         HeavyAttacked?.Invoke();
     }
-
-    //private void OnRunnig(InputAction.CallbackContext context)
-    //{
-    //}
-
-    //private void OnWalking(InputAction.CallbackContext context)
-    //{
-    //    Walking?.Invoke();
-    //}
 }
