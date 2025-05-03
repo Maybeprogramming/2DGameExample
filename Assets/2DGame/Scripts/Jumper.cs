@@ -58,7 +58,6 @@ public class Jumper : MonoBehaviour
             timeElapsed += Time.deltaTime;
             currentDistance = timeElapsed / targetTime * distance;
             transform.position = Vector2.MoveTowards(new Vector2(Position.x, currentPosition), new Vector2(Position.x, maxJumpPosition), currentDistance);
-            Debug.Log(timeElapsed);
 
             yield return null;
         }

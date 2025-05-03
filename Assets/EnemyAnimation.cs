@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Animator))]
-public class CharacterAnimation : MonoBehaviour
+public class EnemyAnimation : MonoBehaviour
 {
     private const string Attack = "OnAttack";
     private const string HeavyAttack = "OnHeavyAttack";
@@ -17,7 +16,7 @@ public class CharacterAnimation : MonoBehaviour
 
     [SerializeField] private Animator _animator;
     [SerializeField] private GroundDetector _groundDetector;
-    [SerializeField] private PlayerInputController _playerInputController;
+    //[SerializeField] private PlayerInputController _playerInputController;
     [SerializeField] private Health _health;
 
     private float _moveDirection;
@@ -25,24 +24,24 @@ public class CharacterAnimation : MonoBehaviour
     private void Start()
     {
         _animator = GetComponent<Animator>();
-        _playerInputController = GetComponent<PlayerInputController>();
+        //_playerInputController = GetComponent<PlayerInputController>();
         _groundDetector = GetComponent<GroundDetector>();
         _health = GetComponent<Health>();
     }
 
     private void OnEnable()
     {
-        _playerInputController.Attacked += OnAttack;
-        _playerInputController.HeavyAttacked += OnHeavyAttack;
-        _playerInputController.Jumped += OnJump;
+        //_playerInputController.Attacked += OnAttack;
+        //_playerInputController.HeavyAttacked += OnHeavyAttack;
+        //_playerInputController.Jumped += OnJump;
         _health.Chanched += OnTakeDamage;
     }
 
     private void OnDisable()
     {
-        _playerInputController.Attacked -= OnAttack;
-        _playerInputController.HeavyAttacked -= OnHeavyAttack;
-        _playerInputController.Jumped -= OnJump;
+        //_playerInputController.Attacked -= OnAttack;
+        //_playerInputController.HeavyAttacked -= OnHeavyAttack;
+        //_playerInputController.Jumped -= OnJump;
         _health.Chanched -= OnTakeDamage;
     }
 
@@ -88,23 +87,23 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     public void OnDead()
-    {   
-        if(_health.IsAlive == false)
+    {
+        if (_health.IsAlive == false)
         {
-            _animator.SetBool(IsDead, !_health.IsAlive);            
+            _animator.SetBool(IsDead, !_health.IsAlive);
             _animator.SetTrigger(Dead);
         }
     }
 
     private void Update()
     {
-        Moving();
+        //Moving();
         OnGround();
     }
 
-    private void Moving()
-    {
-        _moveDirection = Math.Abs(_playerInputController.Direction.x);
-        _animator.SetFloat(MoveDirection, _moveDirection);
-    }
+    //private void Moving()
+    //{
+    //    _moveDirection = Math.Abs(_playerInputController.Direction.x);
+    //    _animator.SetFloat(MoveDirection, _moveDirection);
+    //}
 }
