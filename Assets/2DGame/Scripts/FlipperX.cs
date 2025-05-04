@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class FlipperX : MonoBehaviour
 {
+    [SerializeField] private Vector3 _leftDirection = new(-1, 1, 1);
+    [SerializeField] private Vector3 _rightDirection = new(1, 1, 1);
+
     public void Flip(Vector2 direction)
     {
         if (direction.x > 0f)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+            transform.localScale = _rightDirection;
         }
         else if (direction.x < 0f)
         {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = _leftDirection;
         }
     }
 }
