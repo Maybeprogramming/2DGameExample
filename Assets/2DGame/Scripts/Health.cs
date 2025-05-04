@@ -9,18 +9,26 @@ public class Health : MonoBehaviour
     public bool IsAlive => _healthPoint > 0;
     public float Value => _healthPoint;
 
-    public void TakeDamage(float value)
+    public void Remove(float value)
     {
-        Set(value);
+        if (value > 0 && IsAlive)
+            _healthPoint = _healthPoint - value > 0 ? _healthPoint - value : 0;
+
+        Chanched?.Invoke(Value);
+        OnDead();
+    }
+
+    public void Add(float value)
+    {
+        if (value > 0 && IsAlive)
+            _healthPoint += value;
+
         Chanched?.Invoke(Value);
     }
 
-    private void Set(float value)
+    private void OnDead()
     {
-        _healthPoint = _healthPoint - value > 0 ? _healthPoint - value : 0;
-
-        // В другой скрипт
-        if (!IsAlive)
+        if (IsAlive == false)
         {
             gameObject.TryGetComponent(out Rigidbody2D rigidbody2D);
             gameObject.TryGetComponent(out CapsuleCollider2D capsuleCollider2D);

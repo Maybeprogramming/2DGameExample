@@ -35,13 +35,13 @@ public class Pick : MonoBehaviour
         float timeSecond = 1;
         float tickTime = timeSecond / _frequencyDamageInSec;
 
-        health.TakeDamage(_damage);
+        health.Remove(_damage);
 
         while (_isWork)
         {
             if (elapsedTime > tickTime)
             {
-                health.TakeDamage(_damage);
+                health.Remove(_damage);
                 elapsedTime = 0;
             }
 

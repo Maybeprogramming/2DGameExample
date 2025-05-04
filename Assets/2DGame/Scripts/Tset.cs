@@ -6,6 +6,6 @@ public class Tset : MonoBehaviour
 
     private void OnMouseDown()
     {
-        _health.TakeDamage(1);
+        _health.Remove(1);
     }
 }
