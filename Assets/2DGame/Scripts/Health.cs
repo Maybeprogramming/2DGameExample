@@ -25,7 +25,7 @@ public class Health : MonoBehaviour
             gameObject.TryGetComponent(out Rigidbody2D rigidbody2D);
             gameObject.TryGetComponent(out CapsuleCollider2D capsuleCollider2D);
 
-            rigidbody2D.gravityScale = 0;
+            rigidbody2D.isKinematic = true;
             capsuleCollider2D.enabled = false;
         }
     }
