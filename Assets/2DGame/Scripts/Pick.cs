@@ -4,50 +4,60 @@ using UnityEngine;
 public class Pick : MonoBehaviour
 {
     [SerializeField] private float _damage;
-    [SerializeField] private float _frequencyDamageInSec;
-    [SerializeField] private bool _isWork;
+    [SerializeField] private float _delayTimeSeconds;
+    [SerializeField] private bool _doesDamaged;
 
-    private Coroutine _coroutine;
+    private Coroutine _damagingCoroutine;
+    private Coroutine _delayTimerCoroutine;
+    private WaitForSeconds _delay;
+    [SerializeField] private bool _isWasDamage = false;
+    [SerializeField] private int _count = 0;
+
+    private void Start()
+    {
+        _delay = new WaitForSeconds(_delayTimeSeconds);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log($"Enter");
+
         collision.gameObject.TryGetComponent<Health>(out Health health);
 
-        if (health != null)
+        if (health != null && _isWasDamage == false)
         {
-            _isWork = true;
-            _coroutine = StartCoroutine(Damaging(health));
+            _doesDamaged = true;
+            _isWasDamage = true;
+            _damagingCoroutine = StartCoroutine(Damaging(health));
         }
+
+        _delayTimerCoroutine = StartCoroutine(Countdown());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_coroutine != null)
+        if (_damagingCoroutine != null)
         {
-            _isWork = false;
-            StopCoroutine(nameof(Damaging));
+            _doesDamaged = false;
+            StopCoroutine(_damagingCoroutine);
         }
     }
 
     private IEnumerator Damaging(Health health)
     {
-        float elapsedTime = 0;
-        float timeSecond = 1;
-        float tickTime = timeSecond / _frequencyDamageInSec;
+        Debug.Log($"Корутина № {++_count}");
 
-        health.Remove(_damage);
-
-        while (_isWork)
+        while (_doesDamaged)
         {
-            if (elapsedTime > tickTime)
-            {
-                health.Remove(_damage);
-                elapsedTime = 0;
-            }
-
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
+            health.Remove(_damage);
+            yield return _delay;
         }
+    }
+
+    private IEnumerator Countdown()
+    {
+        yield return _delayTimerCoroutine;
+
+        _isWasDamage = false;
     }
 }
