@@ -25865,9 +25865,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 2146776899}
-  _damage: 0
-  _durationActive: 0
-  _durationRecharge: 0
+  _damage: 1
+  _durationActive: 6
+  _durationRecharge: 4
   _radiusAction: 13.5
   _centrPosition: {fileID: 1842503473}
   _spriteRenderer: {fileID: 1842503474}
