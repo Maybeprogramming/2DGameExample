@@ -23,11 +23,6 @@ public class PlayerInputController : MonoBehaviour
         Direction = _input.Player.Walk.ReadValue<Vector2>();
     }
 
-    private void OnAttack(InputAction.CallbackContext context)
-    {
-        Attacked?.Invoke();
-    }
-
     private void OnEnable()
     {
         _input.Enable();
@@ -42,6 +37,16 @@ public class PlayerInputController : MonoBehaviour
         _input.Player.HeavyAttack.performed -= OnHeavyAttack;
         _input.Player.Jump.performed -= OnJump;
         _input.Disable();
+    }
+
+    public void Disable()
+    {
+        _input.Disable();
+    }
+
+    private void OnAttack(InputAction.CallbackContext context)
+    {
+        Attacked?.Invoke();
     }
 
     private void OnJump(InputAction.CallbackContext context)

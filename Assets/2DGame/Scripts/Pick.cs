@@ -39,7 +39,7 @@ public class Pick : MonoBehaviour
 
     private IEnumerator Damaging(Health health)
     {
-        while (_doesDamaged)
+        while (_doesDamaged && health.IsAlive)
         {
             health.Remove(_damage);
             yield return _delaySeconds;

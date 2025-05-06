@@ -36,6 +36,7 @@ public class CharacterAnimation : MonoBehaviour
         _playerInputController.HeavyAttacked += OnHeavyAttack;
         _playerInputController.Jumped += OnJump;
         _health.Removed += OnTakeDamage;
+        _health.Dead += OnDead;
     }
 
     private void OnDisable()
@@ -43,15 +44,14 @@ public class CharacterAnimation : MonoBehaviour
         _playerInputController.Attacked -= OnAttack;
         _playerInputController.HeavyAttacked -= OnHeavyAttack;
         _playerInputController.Jumped -= OnJump;
-        _health.Chanched -= OnTakeDamage;
+        _health.Removed -= OnTakeDamage;
+        _health.Dead -= OnDead;
     }
 
     private void OnTakeDamage(float damage)
     {
         if (_health.IsAlive)
             _animator.SetTrigger(TakeDamage);
-        else
-            _animator.SetTrigger(Dead);
     }
 
     public void OnAttack()
@@ -88,12 +88,8 @@ public class CharacterAnimation : MonoBehaviour
     }
 
     public void OnDead()
-    {   
-        if(_health.IsAlive == false)
-        {
-            _animator.SetBool(IsDead, !_health.IsAlive);            
-            _animator.SetTrigger(Dead);
-        }
+    {
+        _animator.SetTrigger(Dead);
     }
 
     private void Update()

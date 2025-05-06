@@ -19871,6 +19871,7 @@ GameObject:
   - component: {fileID: 2146776905}
   - component: {fileID: 2146776906}
   - component: {fileID: 2146776907}
+  - component: {fileID: 2146776908}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -20014,6 +20015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfd4cace81b3524c9060581ddec4572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _health: {fileID: 0}
   _playerInputController: {fileID: 2146776899}
   _flipperX: {fileID: 2146776900}
   _walkSpeed: 7
@@ -20148,6 +20150,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 2001016007}
+  _health: {fileID: 2146776903}
+--- !u!114 &2146776908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146776892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0b6b65e99d77794684a9b8fbe4afcf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _health: {fileID: 2146776903}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

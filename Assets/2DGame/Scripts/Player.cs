@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterAnimation), typeof(PlayerInputController), typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Health _health;
     [SerializeField] private PlayerInputController _playerInputController;
     [SerializeField] private FlipperX _flipperX;
     [SerializeField] private float _walkSpeed;
