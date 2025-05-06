@@ -20015,7 +20015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfd4cace81b3524c9060581ddec4572, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: {fileID: 0}
+  _health: {fileID: 2146776903}
   _playerInputController: {fileID: 2146776899}
   _flipperX: {fileID: 2146776900}
   _walkSpeed: 7
@@ -20164,6 +20164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 2146776903}
+  _input: {fileID: 2146776899}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
