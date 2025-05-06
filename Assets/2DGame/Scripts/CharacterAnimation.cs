@@ -35,7 +35,7 @@ public class CharacterAnimation : MonoBehaviour
         _playerInputController.Attacked += OnAttack;
         _playerInputController.HeavyAttacked += OnHeavyAttack;
         _playerInputController.Jumped += OnJump;
-        _health.Chanched += OnTakeDamage;
+        _health.Removed += OnTakeDamage;
     }
 
     private void OnDisable()

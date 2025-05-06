@@ -6,6 +6,8 @@ public class Health : MonoBehaviour
     [SerializeField] private float _healthPoint;
 
     public Action<float> Chanched;
+    public Action<float> Added;
+    public Action<float> Removed;
     public bool IsAlive => _healthPoint > 0;
     public float Value => _healthPoint;
 
@@ -14,6 +16,7 @@ public class Health : MonoBehaviour
         if (value > 0 && IsAlive)
             _healthPoint = _healthPoint - value > 0 ? _healthPoint - value : 0;
 
+        Removed?.Invoke(value);
         Chanched?.Invoke(Value);
         OnDead();
     }
@@ -23,6 +26,7 @@ public class Health : MonoBehaviour
         if (value > 0 && IsAlive)
             _healthPoint += value;
 
+        Added?.Invoke(Value);
         Chanched?.Invoke(Value);
     }
 

@@ -7,57 +7,51 @@ public class Pick : MonoBehaviour
     [SerializeField] private float _delayTimeSeconds;
     [SerializeField] private bool _doesDamaged;
 
-    private Coroutine _damagingCoroutine;
-    private Coroutine _delayTimerCoroutine;
-    private WaitForSeconds _delay;
-    [SerializeField] private bool _isWasDamage = false;
-    [SerializeField] private int _count = 0;
+    private Coroutine _cyclicalDamaging;
+    private Coroutine _delayNewDamaging;
+    private WaitForSeconds _delaySeconds;
+    private bool _isWasDamage = false;
 
     private void Start()
     {
-        _delay = new WaitForSeconds(_delayTimeSeconds);
+        _delaySeconds = new WaitForSeconds(_delayTimeSeconds);
+        _doesDamaged = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"Enter");
-
         collision.gameObject.TryGetComponent<Health>(out Health health);
 
         if (health != null && _isWasDamage == false)
         {
-            _doesDamaged = true;
             _isWasDamage = true;
-            _damagingCoroutine = StartCoroutine(Damaging(health));
+            _cyclicalDamaging = StartCoroutine(Damaging(health));
+            _delayNewDamaging = StartCoroutine(Countdown());
         }
 
-        _delayTimerCoroutine = StartCoroutine(Countdown());
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_damagingCoroutine != null)
-        {
-            _doesDamaged = false;
-            StopCoroutine(_damagingCoroutine);
-        }
+        if (_cyclicalDamaging != null)
+            StopCoroutine(_cyclicalDamaging);
     }
 
     private IEnumerator Damaging(Health health)
     {
-        Debug.Log($"Корутина № {++_count}");
-
         while (_doesDamaged)
         {
             health.Remove(_damage);
-            yield return _delay;
+            yield return _delaySeconds;
         }
     }
 
     private IEnumerator Countdown()
     {
-        yield return _delayTimerCoroutine;
+        yield return _delaySeconds;
 
         _isWasDamage = false;
+
+        yield return null;
     }
 }
