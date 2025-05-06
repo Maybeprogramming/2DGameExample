@@ -46,6 +46,6 @@ public class Vamperism : MonoBehaviour
     {
         _spriteRenderer.enabled = !_spriteRenderer.enabled;
         yield return new WaitForSeconds(duration);
-        _spriteRenderer.enabled = !_spriteRenderer.enabled;
+        //_spriteRenderer.enabled = !_spriteRenderer.enabled;
     }
 }
