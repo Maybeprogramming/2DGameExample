@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EffectPlayer : MonoBehaviour
+public class Effects : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _player;
     [SerializeField] private Health _health;

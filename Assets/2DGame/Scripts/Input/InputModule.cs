@@ -71,6 +71,15 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Vampirism"",
+                    ""type"": ""Button"",
+                    ""id"": ""5ec1e1c8-a82b-45d9-8ab5-4b7fc3253165"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -304,6 +313,17 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""68a8ceef-b841-4752-8a0f-7d99136a2d60"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Vampirism"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -345,6 +365,7 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
+        m_Player_Vampirism = m_Player.FindAction("Vampirism", throwIfNotFound: true);
     }
 
     ~@InputModule()
@@ -416,6 +437,7 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_HeavyAttack;
     private readonly InputAction m_Player_Run;
+    private readonly InputAction m_Player_Vampirism;
     public struct PlayerActions
     {
         private @InputModule m_Wrapper;
@@ -425,6 +447,7 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
         public InputAction @Run => m_Wrapper.m_Player_Run;
+        public InputAction @Vampirism => m_Wrapper.m_Player_Vampirism;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -449,6 +472,9 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
             @Run.started += instance.OnRun;
             @Run.performed += instance.OnRun;
             @Run.canceled += instance.OnRun;
+            @Vampirism.started += instance.OnVampirism;
+            @Vampirism.performed += instance.OnVampirism;
+            @Vampirism.canceled += instance.OnVampirism;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -468,6 +494,9 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
             @Run.started -= instance.OnRun;
             @Run.performed -= instance.OnRun;
             @Run.canceled -= instance.OnRun;
+            @Vampirism.started -= instance.OnVampirism;
+            @Vampirism.performed -= instance.OnVampirism;
+            @Vampirism.canceled -= instance.OnVampirism;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -510,5 +539,6 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+        void OnVampirism(InputAction.CallbackContext context);
     }
 }
