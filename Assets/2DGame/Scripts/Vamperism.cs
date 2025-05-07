@@ -19,69 +19,55 @@ public class Vamperism : MonoBehaviour
     public bool IsActive { get; private set; }
 
     public float DurationActiveTime => _durationActiveTime;
-    public float DurationRachargeTime => _durationRechargeTime;
+    private WaitForSeconds _waitForRechargeTime;
 
     private void Start()
     {
         _input = GetComponent<PlayerInputController>();
         _spriteRenderer.enabled = false;
         IsActive = false;
+        _waitForRechargeTime = new WaitForSeconds(_durationRechargeTime);
     }
 
-    private void OnEnable()
-    {
+    private void OnEnable() =>
         _input.VamperismActivated += OnVamperismActevated;
-    }
 
-    private void OnDisable()
-    {
+
+    private void OnDisable() =>
         _input.VamperismActivated -= OnVamperismActevated;
-    }
 
-    private void OnDrawGizmos()
-    {
+
+    private void OnDrawGizmos() =>
         Gizmos.DrawWireSphere(_vamperismPosition.position, _radiusAction);
-    }
+
 
     private void OnVamperismActevated()
     {
         if (IsActive == false)
         {
-            Debug.Log("Вампиризм ^^");
             IsActive = true;
             StartCoroutine(VamperismActivating(_durationActiveTime));
         }
     }
 
-    private IEnumerator VamperismActivating(float duration)
+    private IEnumerator VamperismActivating(float durationTime)
     {
         float elapsedTime = 0;
-        float timeBetweenHit = duration / --_hitsCount;
+        float timeBetweenHits = durationTime / --_hitsCount;
         int currentHitsCount = 0;
         Collider2D[] colliders;
         Health[] enemiesHealth;
 
-        Activated?.Invoke(duration);
+        Activated?.Invoke(durationTime);
 
-        while (elapsedTime <= duration)
+        while (elapsedTime <= durationTime)
         {
             _spriteRenderer.enabled = true;
-            bool canDamage = elapsedTime - currentHitsCount * timeBetweenHit >= 0;
+            bool canDamage = elapsedTime - currentHitsCount * timeBetweenHits >= 0;
 
             if (currentHitsCount < _hitsCount && canDamage)
             {
-                Debug.Log($"Прошло тиков: {currentHitsCount + 1}");
-
-                colliders = Physics2D.OverlapCircleAll(_vamperismPosition.position, _radiusAction).
-                    Where(collider => collider.TryGetComponent<Enemy>(out Enemy enemy) == true).ToArray();
-
-                enemiesHealth = colliders.Select(collider => collider.GetComponent<Health>()).ToArray();
-
-                foreach (Health enemyHealth in enemiesHealth)
-                {
-                    enemyHealth.Remove(_damage);
-                }
-
+                AplayDamage(out colliders, out enemiesHealth);
                 currentHitsCount++;
             }
 
@@ -89,29 +75,35 @@ public class Vamperism : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log($"Прошло тиков: {currentHitsCount + 1}");
-
-        colliders = Physics2D.OverlapCircleAll(_vamperismPosition.position, _radiusAction).
-                    Where(collider => collider.TryGetComponent<Enemy>(out Enemy enemy) == true).ToArray();
-
-        enemiesHealth = colliders.Select(collider => collider.GetComponent<Health>()).ToArray();
-
-        foreach (Health enemy in enemiesHealth)
-        {
-            enemy.Remove(_damage);
-        }
-
+        AplayDamage(out colliders, out enemiesHealth);
         _spriteRenderer.enabled = false;
-
         Ended?.Invoke();
-
         StartCoroutine(Countdown(_durationRechargeTime));
     }
+
+    private void AplayDamage(out Collider2D[] colliders, out Health[] enemiesHealth)
+    {
+        colliders = GetEnemyColliders();
+        enemiesHealth = GetEnemiesHealth(colliders);
+
+        foreach (Health enemyHealth in enemiesHealth)
+        {
+            enemyHealth.Remove(_damage);
+        }
+    }
+
+    private static Health[] GetEnemiesHealth(Collider2D[] colliders) =>
+        colliders.Select(collider => collider.GetComponent<Health>()).ToArray();
+    
+
+    private Collider2D[] GetEnemyColliders() =>    
+        Physics2D.OverlapCircleAll(_vamperismPosition.position, _radiusAction).
+            Where(collider => collider.TryGetComponent<Enemy>(out Enemy enemy) == true).ToArray(); 
 
     private IEnumerator Countdown(float rechargeDurationTime)
     {
         Activated?.Invoke(rechargeDurationTime);
-        yield return new WaitForSeconds(rechargeDurationTime);
+        yield return _waitForRechargeTime;
         Ended?.Invoke();
         IsActive = false;
     }

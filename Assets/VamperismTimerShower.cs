@@ -3,13 +3,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class VamperismTimerUI : MonoBehaviour
+public class VamperismTimerShower : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
     [SerializeField] private TextMeshProUGUI _textTimer;
     [SerializeField] private TextMeshProUGUI _textCurentSkillState;
     [SerializeField] private Vamperism _vamperism;
-    [SerializeField] private bool _isActive;
     [SerializeField] private string _textActive;
     [SerializeField] private string _textNotActive;
 
@@ -19,7 +18,6 @@ public class VamperismTimerUI : MonoBehaviour
     {
         _sliderMaxValue = 1f;
         _slider.value = _sliderMaxValue;
-        _isActive = _vamperism.IsActive;
         _textCurentSkillState.text = _textNotActive;
     }
 
@@ -37,19 +35,15 @@ public class VamperismTimerUI : MonoBehaviour
 
     private void OnEnded()
     {
-        _isActive = false;
+
         _textTimer.text = SetText(_vamperism.DurationActiveTime);
         _textCurentSkillState.text = _textNotActive;
     }
 
     private void OnActevated(float durationTime)
     {
-        if (_isActive == false)
-        {
-            _isActive = true;
-            _textCurentSkillState.text = _textActive;
-            StartCoroutine(SliderCountdown(durationTime));
-        }
+        _textCurentSkillState.text = _textActive;
+        StartCoroutine(SliderCountdown(durationTime));
     }
 
     private IEnumerator SliderCountdown(float durationTime)
@@ -62,7 +56,7 @@ public class VamperismTimerUI : MonoBehaviour
         while (elapsedTime <= durationTime)
         {
             currentTime -= Time.deltaTime;
-            currentSliderValue = currentTime / durationMaxTime;
+            currentSliderValue = currentTime > 0 ? currentTime / durationMaxTime : 0f;
             _slider.value = currentSliderValue;
 
             _textTimer.text = SetText(currentTime);
