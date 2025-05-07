@@ -35,7 +35,6 @@ public class VamperismTimerShower : MonoBehaviour
 
     private void OnEnded()
     {
-
         _textTimer.text = SetText(_vamperism.DurationActiveTime);
         _textCurentSkillState.text = _textNotActive;
     }
