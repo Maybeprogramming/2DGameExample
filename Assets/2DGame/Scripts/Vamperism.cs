@@ -85,11 +85,15 @@ public class Vamperism : MonoBehaviour
     {
         colliders = GetEnemyColliders();
         enemiesHealth = GetEnemiesHealth(colliders);
+        DamagingNearestEnemy(enemiesHealth);
+    }
 
-        foreach (Health enemyHealth in enemiesHealth)
-        {
-            enemyHealth.Remove(_damage);
-        }
+    private void DamagingNearestEnemy(Health[] enemiesHealth)
+    {
+        Health enemy = enemiesHealth?.OrderBy(healthEnemy => 
+            (healthEnemy.transform.position - transform.position).magnitude).FirstOrDefault();
+
+        enemy?.Remove(_damage);
     }
 
     private static Health[] GetEnemiesHealth(Collider2D[] colliders) =>

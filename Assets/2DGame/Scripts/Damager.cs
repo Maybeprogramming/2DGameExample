@@ -20,7 +20,7 @@ public class Damager : MonoBehaviour
         if (enemy != null)
         {
             enemy.TryGetComponent<Health>(out Health health);
-            health.Remove(damage);
+            health?.Remove(damage);
         }
     }
 

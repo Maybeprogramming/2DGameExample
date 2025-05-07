@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Tset : MonoBehaviour
+public class TestDamageByMouse : MonoBehaviour
 {
     [SerializeField] private Health _health;
 
