@@ -16,6 +16,7 @@ public class Vamperism : MonoBehaviour
 
     public Action<float> Activated;
     public Action Ended;
+    public Action Recharging;
     public bool IsActive { get; private set; }
 
     public float DurationActiveTime => _durationActiveTime;
@@ -67,7 +68,7 @@ public class Vamperism : MonoBehaviour
 
             if (currentHitsCount < _hitsCount && canDamage)
             {
-                AplayDamage(out colliders, out enemiesHealth);
+                ApplyDamage(out colliders, out enemiesHealth);
                 currentHitsCount++;
             }
 
@@ -75,13 +76,13 @@ public class Vamperism : MonoBehaviour
             yield return null;
         }
 
-        AplayDamage(out colliders, out enemiesHealth);
+        ApplyDamage(out colliders, out enemiesHealth);
         _spriteRenderer.enabled = false;
         Ended?.Invoke();
         StartCoroutine(Countdown(_durationRechargeTime));
     }
 
-    private void AplayDamage(out Collider2D[] colliders, out Health[] enemiesHealth)
+    private void ApplyDamage(out Collider2D[] colliders, out Health[] enemiesHealth)
     {
         colliders = GetEnemyColliders();
         enemiesHealth = GetEnemiesHealth(colliders);
@@ -90,10 +91,10 @@ public class Vamperism : MonoBehaviour
 
     private void DamagingNearestEnemy(Health[] enemiesHealth)
     {
-        Health enemy = enemiesHealth?.OrderBy(healthEnemy => 
+        Health enemyHealth = enemiesHealth?.OrderBy(healthEnemy => 
             (healthEnemy.transform.position - transform.position).magnitude).FirstOrDefault();
 
-        enemy?.Remove(_damage);
+        enemyHealth?.Remove(_damage);
     }
 
     private static Health[] GetEnemiesHealth(Collider2D[] colliders) =>
@@ -107,6 +108,7 @@ public class Vamperism : MonoBehaviour
     private IEnumerator Countdown(float rechargeDurationTime)
     {
         Activated?.Invoke(rechargeDurationTime);
+        Recharging?.Invoke();
         yield return _waitForRechargeTime;
         Ended?.Invoke();
         IsActive = false;

@@ -7,22 +7,32 @@ using UnityEngine.UI;
 public class VamperismTimerShower : MonoBehaviour
 {
     [SerializeField] private Slider _slider;
-    [SerializeField] private TextMeshProUGUI _textTimer;
-    [SerializeField] private TextMeshProUGUI _textCurentSkillState;
+    [SerializeField] private TextMeshProUGUI _timerTextArea;
+    [SerializeField] private TextMeshProUGUI _stateTextArea;
+    [SerializeField] private TextMeshProUGUI _pressKeyTextArea;
     [SerializeField] private Vamperism _vamperism;
     [SerializeField] private string _textActive;
     [SerializeField] private string _textNotActive;
+    [SerializeField] private string _textRecharging;
+    [SerializeField] private string _textPressKey;
 
     private void Start()
     {
         _slider.value = _slider.maxValue;
-        _textCurentSkillState.text = _textNotActive;
+        _stateTextArea.text = _textNotActive;
+        _pressKeyTextArea.text = _textPressKey;
     }
 
     private void OnEnable()
     {
         _vamperism.Activated += OnActevated;
         _vamperism.Ended += OnEnded;
+        _vamperism.Recharging += OnRecharging;
+    }
+
+    private void OnRecharging()
+    {
+        _stateTextArea.text = _textRecharging;
     }
 
     private void OnDisable()
@@ -33,39 +43,38 @@ public class VamperismTimerShower : MonoBehaviour
 
     private void OnEnded()
     {
-        _textTimer.text = SetText(_vamperism.DurationActiveTime);
-        _textCurentSkillState.text = _textNotActive;
+        _timerTextArea.text = SetText(_vamperism.DurationActiveTime);
+        _stateTextArea.text = _textNotActive;
+        _pressKeyTextArea.text = _textPressKey;
     }
 
     private void OnActevated(float durationTime)
     {
-        _textCurentSkillState.text = _textActive;
-        StartCoroutine(SliderCountdown(durationTime));
+        _stateTextArea.text = _textActive;
+        _pressKeyTextArea.text = String.Empty;
+        StartCoroutine(Countdown(durationTime));
     }
 
-    private IEnumerator SliderCountdown(float durationTime)
+    private IEnumerator Countdown(float durationTime)
     {
-        float elapsedTime = 0;
-        float durationMaxTime = durationTime;
-        float currentTime = durationMaxTime;
+        float elapsedTime = 0f;
+        float currentTime = Mathf.Clamp01(_slider.value) * durationTime;
+        float multiplier = currentTime <= _slider.maxValue ? -_slider.maxValue : _slider.maxValue;
 
         while (elapsedTime <= durationTime)
         {
-            currentTime -= Time.deltaTime;
+            currentTime -= Time.deltaTime * multiplier;
 
-            _slider.value = Mathf.Clamp01(currentTime / durationMaxTime);
-            _textTimer.text = SetText(currentTime);
+            _slider.value = Mathf.Clamp01(currentTime / durationTime);
+            _timerTextArea.text = SetText(currentTime);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        _slider.value = _slider.maxValue;
     }
 
     private string SetText(float duration)
     {
-        string text = string.Format("{0:f1} sec", duration);
-        return text;
+        return string.Format("{0:f1} sec", duration);
     }
 }
