@@ -723,7 +723,7 @@ GameObject:
   - component: {fileID: 94045989}
   - component: {fileID: 94045988}
   m_Layer: 5
-  m_Name: VampirismText
+  m_Name: VampirismStateText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -745,7 +745,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 77, y: -120.9}
+  m_AnchoredPosition: {x: 75.9, y: -120.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &94045988
@@ -831,7 +831,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -14.238403, z: 23.351074, w: 20.38263}
+  m_margin: {x: -1.4911728, y: -14.238403, z: 25.960602, w: 20.38263}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5564,6 +5564,7 @@ GameObject:
   - component: {fileID: 762484127}
   - component: {fileID: 762484126}
   - component: {fileID: 762484130}
+  - component: {fileID: 762484131}
   m_Layer: 5
   m_Name: Canvas - UserInterface
   m_TagString: Untagged
@@ -5668,6 +5669,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _wallet: {fileID: 2146776906}
   _textMeshPro: {fileID: 1602863520}
+--- !u!114 &762484131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762484125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920c82691fa60cd489e909ce5a1ca798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 366579662}
+  _textTimer: {fileID: 1629617816}
+  _textCurentSkillState: {fileID: 94045988}
+  _vamperism: {fileID: 2146776909}
+  _timerMax: 0
+  _currentTimer: 0
+  _isActive: 0
+  _textActive: 'Duration:'
+  _textNotActive: Not Active
+  _textRecharge: 'Recharge:'
 --- !u!1 &782909611
 GameObject:
   m_ObjectHideFlags: 0
@@ -11892,7 +11915,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 250}
+  m_SizeDelta: {x: 320, y: 250}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &915050786
 MonoBehaviour:
@@ -16638,7 +16661,7 @@ GameObject:
   - component: {fileID: 1629617817}
   - component: {fileID: 1629617816}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: TimerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25973,11 +25996,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 2146776899}
-  _damage: 1
-  _durationActiveTime: 0
-  _durationRechargeTime: 0
+  _damage: 0.5
+  _hitsCount: 12
+  _durationActiveTime: 6
+  _durationRechargeTime: 4
   _radiusAction: 13.5
-  _centrPosition: {fileID: 637326962}
+  _vamperismPosition: {fileID: 637326962}
   _spriteRenderer: {fileID: 637326961}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
