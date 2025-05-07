@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FlipperX : MonoBehaviour
+public class Flipper : MonoBehaviour
 {
     [SerializeField] private Vector3 _leftDirection = new(-1, 1, 1);
     [SerializeField] private Vector3 _rightDirection = new(1, 1, 1);

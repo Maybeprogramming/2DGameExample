@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class InputSwitchOff : MonoBehaviour
+public class InputSwitcher : MonoBehaviour
 {
     [SerializeField] private Health _health;
     [SerializeField] private PlayerInputController _input;

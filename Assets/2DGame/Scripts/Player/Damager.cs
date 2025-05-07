@@ -8,12 +8,17 @@ public class Damager : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private float _damageHeavy;
 
-    private void HeavyAttack()
+    private void OnDrawGizmos()
     {
-        TakeAttak(_damageHeavy);
+        Gizmos.DrawWireSphere(_pointDetectorEnemy.position, _radiusDetectorEnemy);
     }
 
-    private void TakeAttak(float damage)
+    private void HeavyAttack()
+    {
+        TryAttack(_damageHeavy);
+    }
+
+    private void TryAttack(float damage)
     {
         Collider2D enemy = Physics2D.OverlapCircle(_pointDetectorEnemy.position, _radiusDetectorEnemy, _enemyMask);
 
@@ -26,11 +31,6 @@ public class Damager : MonoBehaviour
 
     private void Attack()
     {
-        TakeAttak(_damage);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(_pointDetectorEnemy.position, _radiusDetectorEnemy);
+        TryAttack(_damage);
     }
 }

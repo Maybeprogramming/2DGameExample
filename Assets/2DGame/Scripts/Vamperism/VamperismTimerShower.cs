@@ -13,12 +13,9 @@ public class VamperismTimerShower : MonoBehaviour
     [SerializeField] private string _textActive;
     [SerializeField] private string _textNotActive;
 
-    private float _sliderMaxValue;
-
     private void Start()
     {
-        _sliderMaxValue = 1f;
-        _slider.value = _sliderMaxValue;
+        _slider.value = _slider.maxValue;
         _textCurentSkillState.text = _textNotActive;
     }
 
@@ -49,27 +46,26 @@ public class VamperismTimerShower : MonoBehaviour
     private IEnumerator SliderCountdown(float durationTime)
     {
         float elapsedTime = 0;
-        float currentSliderValue;
         float durationMaxTime = durationTime;
         float currentTime = durationMaxTime;
 
         while (elapsedTime <= durationTime)
         {
             currentTime -= Time.deltaTime;
-            currentSliderValue = currentTime > 0 ? currentTime / durationMaxTime : 0f;
-            _slider.value = currentSliderValue;
 
+            _slider.value = Mathf.Clamp01(currentTime / durationMaxTime);
             _textTimer.text = SetText(currentTime);
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        _slider.value = _sliderMaxValue;
+        _slider.value = _slider.maxValue;
     }
 
     private string SetText(float duration)
     {
-        return duration.ToString($"{0:D} sec");         
+        string text = string.Format("{0:f1} sec", duration);
+        return text;
     }
 }

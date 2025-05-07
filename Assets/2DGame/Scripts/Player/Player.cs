@@ -6,14 +6,14 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Health _health;
     [SerializeField] private PlayerInputController _playerInputController;
-    [SerializeField] private FlipperX _flipperX;
+    [SerializeField] private Flipper _flipperX;
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
 
     private void Start()
     {
         _playerInputController = GetComponent<PlayerInputController>();
-        _flipperX = GetComponent<FlipperX>();
+        _flipperX = GetComponent<Flipper>();
     }
 
     private void OnEnable()

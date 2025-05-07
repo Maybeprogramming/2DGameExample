@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Health _health;
     [SerializeField] private Animator _animator;
     [SerializeField] private Transform[] _waypoints;
-    [SerializeField] private FlipperX _flipperX;
+    [SerializeField] private Flipper _flipperX;
     [SerializeField] private float _patrolSpeed;
     [SerializeField] private Vector2 _targetWaypoint;
     [SerializeField] private int _currentIndexWaypoint = 1;

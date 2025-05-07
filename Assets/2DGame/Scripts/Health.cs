@@ -16,7 +16,8 @@ public class Health : MonoBehaviour
     {
         if (value > 0 && IsAlive)
         {
-            _healthPoint = _healthPoint - value > 0 ? _healthPoint - value : 0;
+            _healthPoint = Mathf.Clamp(_healthPoint - value, 0, _healthPoint);
+
             Removed?.Invoke(value);
             Chanched?.Invoke(Value);
         }

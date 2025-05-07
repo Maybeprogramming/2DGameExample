@@ -2676,7 +2676,6 @@ GameObject:
   - component: {fileID: 387745511}
   - component: {fileID: 387745512}
   - component: {fileID: 387745513}
-  - component: {fileID: 387745515}
   - component: {fileID: 387745514}
   - component: {fileID: 387745516}
   - component: {fileID: 387745517}
@@ -2848,22 +2847,6 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &387745515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387745507}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e09dac5cf1a7e48a4c9c0325900de4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 387745508}
-  _groundDetector: {fileID: 387745514}
-  _playerInputController: {fileID: 0}
-  _health: {fileID: 387745512}
 --- !u!114 &387745516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2888,7 +2871,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 387745507}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7850746c21eb942ab295886865139c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8be941b5c6489d848930482940a6a55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leftDirection: {x: -1, y: 1, z: 1}
@@ -4139,7 +4122,6 @@ GameObject:
   - component: {fileID: 613344503}
   - component: {fileID: 613344502}
   - component: {fileID: 613344501}
-  - component: {fileID: 613344500}
   - component: {fileID: 613344499}
   - component: {fileID: 613344498}
   - component: {fileID: 613344497}
@@ -4159,7 +4141,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 613344496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7850746c21eb942ab295886865139c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8be941b5c6489d848930482940a6a55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leftDirection: {x: -1, y: 1, z: 1}
@@ -4196,22 +4178,6 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &613344500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 613344496}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e09dac5cf1a7e48a4c9c0325900de4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 613344505}
-  _groundDetector: {fileID: 613344499}
-  _playerInputController: {fileID: 0}
-  _health: {fileID: 613344502}
 --- !u!114 &613344501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16673,7 +16639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 6 sec
+  m_text: 6,0 sec
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a018ea393e0ee8b4c86839a0c6e3c5c2, type: 2}
   m_sharedMaterial: {fileID: 5489904401432162492, guid: a018ea393e0ee8b4c86839a0c6e3c5c2, type: 2}
@@ -16700,8 +16666,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -18671,7 +18637,6 @@ GameObject:
   - component: {fileID: 1896789651}
   - component: {fileID: 1896789650}
   - component: {fileID: 1896789649}
-  - component: {fileID: 1896789648}
   - component: {fileID: 1896789647}
   - component: {fileID: 1896789646}
   - component: {fileID: 1896789645}
@@ -18691,7 +18656,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1896789644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7850746c21eb942ab295886865139c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8be941b5c6489d848930482940a6a55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leftDirection: {x: -1, y: 1, z: 1}
@@ -18728,22 +18693,6 @@ MonoBehaviour:
   _groundMask:
     serializedVersion: 2
     m_Bits: 1024
---- !u!114 &1896789648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896789644}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e09dac5cf1a7e48a4c9c0325900de4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1896789653}
-  _groundDetector: {fileID: 1896789647}
-  _playerInputController: {fileID: 0}
-  _health: {fileID: 1896789650}
 --- !u!114 &1896789649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25848,7 +25797,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2146776892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7850746c21eb942ab295886865139c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8be941b5c6489d848930482940a6a55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leftDirection: {x: -1, y: 1, z: 1}
