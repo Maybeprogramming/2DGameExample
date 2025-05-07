@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -69,6 +70,6 @@ public class VamperismTimerShower : MonoBehaviour
 
     private string SetText(float duration)
     {
-        return $"{(int)duration} sec";
+        return duration.ToString($"{0:D} sec");         
     }
 }
