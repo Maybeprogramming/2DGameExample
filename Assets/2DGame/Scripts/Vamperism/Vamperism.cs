@@ -53,7 +53,8 @@ public class Vamperism : MonoBehaviour
     private IEnumerator VamperismActivating(float durationTime)
     {
         float elapsedTime = 0;
-        float timeBetweenHits = durationTime / --_hitsCount;
+        float timeRanges = _hitsCount - 1;
+        float timeBetweenHits = durationTime / timeRanges;
         int currentHitsCount = 0;
         Collider2D[] colliders;
         Health[] enemiesHealth;
@@ -63,7 +64,7 @@ public class Vamperism : MonoBehaviour
         while (elapsedTime <= durationTime)
         {
             _spriteRenderer.enabled = true;
-            bool canDamage = elapsedTime - currentHitsCount * timeBetweenHits >= 0;
+            bool canDamage = elapsedTime - timeBetweenHits * currentHitsCount >= 0f;
 
             if (currentHitsCount < _hitsCount && canDamage)
             {
@@ -79,7 +80,7 @@ public class Vamperism : MonoBehaviour
         _spriteRenderer.enabled = false;
         Ended?.Invoke();
         StartCoroutine(Countdown(_durationRechargeTime));
-    }   
+    }
 
     private IEnumerator Countdown(float rechargeDurationTime)
     {
