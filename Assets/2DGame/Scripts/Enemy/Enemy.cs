@@ -49,11 +49,11 @@ public class Enemy : MonoBehaviour
             {
                 transform.position = Vector2.MoveTowards(transform.position, _targetWaypoint, _patrolSpeed * Time.deltaTime);
                 _flipperX.Flip(GetDirection());
-                _animator.SetFloat("MoveDirection", Mathf.Abs(GetDirection().x)); //Магические параметры
+                _animator.SetFloat("MoveDirection", Mathf.Abs(GetDirection().x));
             }
             else
             {
-                _animator.SetFloat("MoveDirection", 0); //Магические параметры
+                _animator.SetFloat("MoveDirection", 0);
                 _targetWaypoint = SetNextWaypoint();
                 yield return _waitTime;
             }

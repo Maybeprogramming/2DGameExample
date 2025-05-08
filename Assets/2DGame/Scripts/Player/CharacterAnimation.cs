@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Animator))]
 public class CharacterAnimation : MonoBehaviour
 {
     private const string Attack = "OnAttack";
@@ -24,10 +23,10 @@ public class CharacterAnimation : MonoBehaviour
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
-        _playerInputController = GetComponent<PlayerInputController>();
-        _groundDetector = GetComponent<GroundDetector>();
-        _health = GetComponent<Health>();
+        //_animator = GetComponent<Animator>();
+        //_playerInputController = GetComponent<PlayerInputController>();
+        //_groundDetector = GetComponent<GroundDetector>();
+        //_health = GetComponent<Health>();
     }
 
     private void OnEnable()

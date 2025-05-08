@@ -1,7 +1,6 @@
 using UnityEngine;
 
 [SelectionBase]
-[RequireComponent(typeof(CharacterAnimation), typeof(PlayerInputController), typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
     [SerializeField] private Health _health;
@@ -12,8 +11,8 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        _playerInputController = GetComponent<PlayerInputController>();
-        _flipperX = GetComponent<Flipper>();
+        //_playerInputController = GetComponent<PlayerInputController>();
+        //_flipperX = GetComponent<Flipper>();
     }
 
     private void OnEnable()

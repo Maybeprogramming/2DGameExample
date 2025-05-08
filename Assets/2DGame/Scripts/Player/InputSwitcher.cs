@@ -7,8 +7,8 @@ public class InputSwitcher : MonoBehaviour
 
     private void Start()
     {
-        _health = GetComponent<Health>();
-        _input = GetComponent<PlayerInputController>();
+        //_health = GetComponent<Health>();
+        //_input = GetComponent<PlayerInputController>();
     }
 
     private void OnEnable()

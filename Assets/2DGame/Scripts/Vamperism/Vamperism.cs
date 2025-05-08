@@ -18,13 +18,12 @@ public class Vamperism : MonoBehaviour
     public Action Ended;
     public Action Recharging;
     public bool IsActive { get; private set; }
-
     public float DurationActiveTime => _durationActiveTime;
+
     private WaitForSeconds _waitForRechargeTime;
 
     private void Start()
     {
-        _input = GetComponent<PlayerInputController>();
         _spriteRenderer.enabled = false;
         IsActive = false;
         _waitForRechargeTime = new WaitForSeconds(_durationRechargeTime);
@@ -80,6 +79,15 @@ public class Vamperism : MonoBehaviour
         _spriteRenderer.enabled = false;
         Ended?.Invoke();
         StartCoroutine(Countdown(_durationRechargeTime));
+    }   
+
+    private IEnumerator Countdown(float rechargeDurationTime)
+    {
+        Activated?.Invoke(rechargeDurationTime);
+        Recharging?.Invoke();
+        yield return _waitForRechargeTime;
+        Ended?.Invoke();
+        IsActive = false;
     }
 
     private void ApplyDamage(out Collider2D[] colliders, out Health[] enemiesHealth)
@@ -91,7 +99,7 @@ public class Vamperism : MonoBehaviour
 
     private void DamagingNearestEnemy(Health[] enemiesHealth)
     {
-        Health enemyHealth = enemiesHealth?.OrderBy(healthEnemy => 
+        Health enemyHealth = enemiesHealth?.OrderBy(healthEnemy =>
             (healthEnemy.transform.position - transform.position).magnitude).FirstOrDefault();
 
         enemyHealth?.Remove(_damage);
@@ -99,18 +107,9 @@ public class Vamperism : MonoBehaviour
 
     private static Health[] GetEnemiesHealth(Collider2D[] colliders) =>
         colliders.Select(collider => collider.GetComponent<Health>()).ToArray();
-    
 
-    private Collider2D[] GetEnemyColliders() =>    
+
+    private Collider2D[] GetEnemyColliders() =>
         Physics2D.OverlapCircleAll(_vamperismPosition.position, _radiusAction).
-            Where(collider => collider.TryGetComponent<Enemy>(out Enemy enemy) == true).ToArray(); 
-
-    private IEnumerator Countdown(float rechargeDurationTime)
-    {
-        Activated?.Invoke(rechargeDurationTime);
-        Recharging?.Invoke();
-        yield return _waitForRechargeTime;
-        Ended?.Invoke();
-        IsActive = false;
-    }
+            Where(collider => collider.TryGetComponent<Enemy>(out Enemy enemy) == true).ToArray();
 }
