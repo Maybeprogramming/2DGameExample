@@ -424,6 +424,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &50450884 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
+  m_PrefabInstance: {fileID: 637326960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &58115855
 GameObject:
   m_ObjectHideFlags: 0
@@ -5402,7 +5407,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 637326963}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
 --- !u!212 &637326961 stripped
 SpriteRenderer:
@@ -5414,6 +5422,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
   m_PrefabInstance: {fileID: 637326960}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &637326963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50450884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b656a64e0354f8a4f933efec23ebb091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _vamperism: {fileID: 2146776909}
+  _spriteRenderer: {fileID: 637326961}
 --- !u!1 &651955177
 GameObject:
   m_ObjectHideFlags: 0
@@ -35703,9 +35725,6 @@ GameObject:
   - component: {fileID: 2146776894}
   - component: {fileID: 2146776895}
   - component: {fileID: 2146776896}
-  - component: {fileID: 2146776898}
-  - component: {fileID: 2146776897}
-  - component: {fileID: 2146776899}
   - component: {fileID: 2146776900}
   - component: {fileID: 2146776901}
   - component: {fileID: 2146776902}
@@ -35831,51 +35850,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0049921274, y: -0.2346344}
   m_Size: {x: 1.3886163, y: 4.3447914}
   m_Direction: 0
---- !u!114 &2146776897
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146776892}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67e09dac5cf1a7e48a4c9c0325900de4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 2146776894}
-  _groundDetector: {fileID: 2146776901}
-  _playerInputController: {fileID: 2146776899}
-  _health: {fileID: 2146776903}
---- !u!114 &2146776898
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146776892}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cfd4cace81b3524c9060581ddec4572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: {fileID: 2146776903}
-  _playerInputController: {fileID: 2146776899}
-  _flipperX: {fileID: 2146776900}
-  _walkSpeed: 7
-  _runSpeed: 8
---- !u!114 &2146776899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2146776892}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f60a6989b7496545b44230c316d53e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2146776900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36028,7 +36002,6 @@ MonoBehaviour:
   _durationRechargeTime: 4
   _radiusAction: 13.5
   _vamperismPosition: {fileID: 637326962}
-  _spriteRenderer: {fileID: 637326961}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

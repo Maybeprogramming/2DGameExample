@@ -2,24 +2,18 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInputController), typeof(GroundDetector))]
+[RequireComponent(typeof(GroundDetector))]
 public class Jumper : MonoBehaviour
 {
     [SerializeField] private PlayerInputController _controller;
     [SerializeField] private GroundDetector _detector;
     [SerializeField] private float _targetTime;
     [SerializeField] private float _heihtJump;
-    [SerializeField] private CeilingDetector _ceilingDetector; //Ссылка на компонент через инспектор! Плохо!
+    [SerializeField] private CeilingDetector _ceilingDetector;
 
     private Coroutine _coroutine;
 
     public Vector2 Position => transform.position;
-
-    private void Start()
-    {
-        _controller = GetComponent<PlayerInputController>();
-        _detector = GetComponent<GroundDetector>();
-    }
 
     private void OnEnable()
     {
