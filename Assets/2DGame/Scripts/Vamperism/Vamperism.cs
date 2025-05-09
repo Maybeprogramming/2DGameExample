@@ -6,6 +6,7 @@ using UnityEngine;
 public class Vamperism : MonoBehaviour
 {
     [SerializeField] private PlayerInputController _input;
+    [SerializeField] private Health _playerHealth;
     [SerializeField] private float _damage;
     [SerializeField] private float _hitsCount;
     [SerializeField] private float _durationActiveTime;
@@ -62,6 +63,7 @@ public class Vamperism : MonoBehaviour
             if (currentHitsCount < _hitsCount && canDamage)
             {
                 ApplyDamage();
+                _playerHealth.Add(_damage);
                 currentHitsCount++;
             }
 
