@@ -64,15 +64,6 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Run"",
-                    ""type"": ""Value"",
-                    ""id"": ""32c870b0-931e-456a-8672-cc2cd9673f1d"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Vampirism"",
                     ""type"": ""Button"",
                     ""id"": ""5ec1e1c8-a82b-45d9-8ab5-4b7fc3253165"",
@@ -80,6 +71,15 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Run"",
+                    ""type"": ""Button"",
+                    ""id"": ""32c870b0-931e-456a-8672-cc2cd9673f1d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -282,39 +282,6 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""1D Axis"",
-                    ""id"": ""f2aeb9e2-32bf-4f78-bd3d-700e9635fe71"",
-                    ""path"": ""1DAxis"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Run"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Negative"",
-                    ""id"": ""2ba068d4-b305-4af9-a6d0-3d3ce50889f7"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Run"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Positive"",
-                    ""id"": ""e45cf8d1-e3d3-4949-bd08-d09fe2651a0f"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Run"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": """",
                     ""id"": ""68a8ceef-b841-4752-8a0f-7d99136a2d60"",
                     ""path"": ""<Keyboard>/e"",
@@ -364,8 +331,8 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_HeavyAttack = m_Player.FindAction("HeavyAttack", throwIfNotFound: true);
-        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Vampirism = m_Player.FindAction("Vampirism", throwIfNotFound: true);
+        m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
     }
 
     ~@InputModule()
@@ -436,8 +403,8 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_HeavyAttack;
-    private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Vampirism;
+    private readonly InputAction m_Player_Run;
     public struct PlayerActions
     {
         private @InputModule m_Wrapper;
@@ -446,8 +413,8 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @HeavyAttack => m_Wrapper.m_Player_HeavyAttack;
-        public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Vampirism => m_Wrapper.m_Player_Vampirism;
+        public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -469,12 +436,12 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
             @HeavyAttack.started += instance.OnHeavyAttack;
             @HeavyAttack.performed += instance.OnHeavyAttack;
             @HeavyAttack.canceled += instance.OnHeavyAttack;
-            @Run.started += instance.OnRun;
-            @Run.performed += instance.OnRun;
-            @Run.canceled += instance.OnRun;
             @Vampirism.started += instance.OnVampirism;
             @Vampirism.performed += instance.OnVampirism;
             @Vampirism.canceled += instance.OnVampirism;
+            @Run.started += instance.OnRun;
+            @Run.performed += instance.OnRun;
+            @Run.canceled += instance.OnRun;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -491,12 +458,12 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
             @HeavyAttack.started -= instance.OnHeavyAttack;
             @HeavyAttack.performed -= instance.OnHeavyAttack;
             @HeavyAttack.canceled -= instance.OnHeavyAttack;
-            @Run.started -= instance.OnRun;
-            @Run.performed -= instance.OnRun;
-            @Run.canceled -= instance.OnRun;
             @Vampirism.started -= instance.OnVampirism;
             @Vampirism.performed -= instance.OnVampirism;
             @Vampirism.canceled -= instance.OnVampirism;
+            @Run.started -= instance.OnRun;
+            @Run.performed -= instance.OnRun;
+            @Run.canceled -= instance.OnRun;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -538,7 +505,7 @@ public partial class @InputModule: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnHeavyAttack(InputAction.CallbackContext context);
-        void OnRun(InputAction.CallbackContext context);
         void OnVampirism(InputAction.CallbackContext context);
+        void OnRun(InputAction.CallbackContext context);
     }
 }

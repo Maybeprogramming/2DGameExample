@@ -301,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5028679}
   m_Layer: 0
-  m_Name: Waypoints (1)
+  m_Name: Waypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,13 +316,13 @@ Transform:
   m_GameObject: {fileID: 5028678}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.72, y: -1.75, z: 0}
+  m_LocalPosition: {x: 9.46, y: -0.14999998, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 445651142}
   - {fileID: 362050432}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1290676300}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &18759186
 GameObject:
@@ -951,6 +951,7 @@ Transform:
   m_Children:
   - {fileID: 584781518}
   - {fileID: 965602321}
+  - {fileID: 1595292210}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &108684768
@@ -7063,7 +7064,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -12702,7 +12703,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -19825,6 +19826,7 @@ Transform:
   m_Children:
   - {fileID: 2042310921}
   - {fileID: 1375362980}
+  - {fileID: 5028679}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1294541245
@@ -21718,7 +21720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1595292210}
   m_Layer: 0
-  m_Name: Waypoints (2)
+  m_Name: Waypoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21733,13 +21735,13 @@ Transform:
   m_GameObject: {fileID: 1595292209}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25.150002, y: 7.7000003, z: 0}
+  m_LocalPosition: {x: 18.460001, y: 18.49, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 586361874}
   - {fileID: 1934917242}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 106446885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1602863518
 GameObject:
@@ -24736,7 +24738,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.1
+  m_MaxParticleSize: 0.3
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -25018,7 +25020,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -30872,7 +30874,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -36036,8 +36038,6 @@ SceneRoots:
   - {fileID: 132382492}
   - {fileID: 1698671562}
   - {fileID: 631827751}
-  - {fileID: 5028679}
-  - {fileID: 1595292210}
   - {fileID: 27177351}
   - {fileID: 762484129}
   - {fileID: 389687208}

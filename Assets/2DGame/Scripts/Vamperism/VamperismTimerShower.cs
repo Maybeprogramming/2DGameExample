@@ -16,7 +16,7 @@ public class VamperismTimerShower : MonoBehaviour
     [SerializeField] private string _textRecharging;
     [SerializeField] private string _textPressKey;
 
-    private void Start()
+    private void Awake()
     {
         _slider.value = _slider.maxValue;
         _stateTextArea.text = _textNotActive;
@@ -30,15 +30,11 @@ public class VamperismTimerShower : MonoBehaviour
         _vamperism.Recharging += OnRecharging;
     }
 
-    private void OnRecharging()
-    {
-        _stateTextArea.text = _textRecharging;
-    }
-
     private void OnDisable()
     {
         _vamperism.Activated -= OnActevated;
         _vamperism.Ended -= OnEnded;
+        _vamperism.Recharging -= OnRecharging;
     }
 
     private void OnEnded()
@@ -46,6 +42,11 @@ public class VamperismTimerShower : MonoBehaviour
         _timerTextArea.text = SetText(_vamperism.DurationActiveTime);
         _stateTextArea.text = _textNotActive;
         _pressKeyTextArea.text = _textPressKey;
+    }
+
+    private void OnRecharging()
+    {
+        _stateTextArea.text = _textRecharging;
     }
 
     private void OnActevated(float durationTime)

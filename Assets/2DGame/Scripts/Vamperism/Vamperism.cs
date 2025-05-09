@@ -22,7 +22,7 @@ public class Vamperism : MonoBehaviour
 
     private WaitForSeconds _waitForRechargeTime;
 
-    private void Start()
+    private void Awake()
     {
         _spriteRenderer.enabled = false;
         IsActive = false;

@@ -9,18 +9,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float _walkSpeed;
     [SerializeField] private float _runSpeed;
 
-    private void Start()
-    {
-        //_playerInputController = GetComponent<PlayerInputController>();
-        //_flipperX = GetComponent<Flipper>();
-    }
-
-    private void OnEnable()
-    {
-        //_playerInputController.Attacked += OnAttack;
-        //_playerInputController.HeavyAttacked += OnHeavyAttack;
-    }
-
     private void Update()
     {
         Move();

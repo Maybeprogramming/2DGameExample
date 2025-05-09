@@ -11,7 +11,6 @@ public class PlayerInputController : MonoBehaviour
     public Action Attacked;
     public Action HeavyAttacked;
     public Action<InputAction.CallbackContext> Jumped;
-    public Action Walking;
     public Action VamperismActivated;
 
     private void Awake()
