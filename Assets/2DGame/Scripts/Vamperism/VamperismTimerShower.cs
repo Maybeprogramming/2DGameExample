@@ -44,9 +44,10 @@ public class VamperismTimerShower : MonoBehaviour
         _pressKeyTextArea.text = _textPressKey;
     }
 
-    private void OnRecharging()
+    private void OnRecharging(float rechargingTime)
     {
         _stateTextArea.text = _textRecharging;
+        StartCoroutine(Countdown(rechargingTime));
     }
 
     private void OnActevated(float durationTime)
