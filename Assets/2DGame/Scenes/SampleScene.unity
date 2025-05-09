@@ -35996,6 +35996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 1534937098}
+  _playerHealth: {fileID: 2146776903}
   _damage: 0.5
   _hitsCount: 12
   _durationActiveTime: 6
