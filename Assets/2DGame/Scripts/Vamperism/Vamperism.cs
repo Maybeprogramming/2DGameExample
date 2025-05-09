@@ -56,22 +56,22 @@ public class Vamperism : MonoBehaviour
 
         Activated?.Invoke(_durationActiveTime);
 
-        while (elapsedTime <= _durationActiveTime)
+        while (elapsedTime < _durationActiveTime + 0.01f)
         {
-            bool canDamage = elapsedTime - timeBetweenHits * currentHitsCount >= 0f;
+            bool canDamage = timeBetweenHits * currentHitsCount - elapsedTime <= 0f;
 
-            if (currentHitsCount < _hitsCount && canDamage)
+            if (canDamage)
             {
+                Debug.Log($"Hit - {currentHitsCount + 1}, {string.Format("Время {0:f4}", timeBetweenHits * currentHitsCount - elapsedTime)}");
                 ApplyDamage();
-                _playerHealth.Add(_damage);
                 currentHitsCount++;
+
             }
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        ApplyDamage();
         Ended?.Invoke();
         StartCoroutine(Countdown(_durationRechargeTime));
     }
@@ -86,17 +86,20 @@ public class Vamperism : MonoBehaviour
 
     private void ApplyDamage()
     {
-        Collider2D[] colliders = GetEnemyColliders();
-        Health[] enemiesHealth = GetEnemiesHealth(colliders);
-        DamagingNearestEnemy(enemiesHealth);
+        Collider2D[] colliders = GetEnemyColliders();        ;
+        DamagingNearestEnemy(GetEnemiesHealth(colliders));
     }
 
     private void DamagingNearestEnemy(Health[] enemiesHealth)
     {
-        Health enemyHealth = enemiesHealth?.OrderBy(healthEnemy =>
-            (healthEnemy.transform.position - transform.position).sqrMagnitude).FirstOrDefault();
+        if (enemiesHealth.Count() > 0)
+        {
+            Health enemyHealth = enemiesHealth?.OrderBy(healthEnemy =>
+                (healthEnemy.transform.position - transform.position).sqrMagnitude).First();
 
-        enemyHealth?.Remove(_damage);
+            enemyHealth?.Remove(_damage);
+            _playerHealth.Add(_damage);
+        }
     }
 
     private static Health[] GetEnemiesHealth(Collider2D[] colliders) =>
