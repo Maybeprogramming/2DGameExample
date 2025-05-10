@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Linq;
 using UnityEngine;
 
 public class Vamperism : MonoBehaviour
@@ -18,6 +17,7 @@ public class Vamperism : MonoBehaviour
     public Action<float> Activated;
     public Action Ended;
     public Action<float> Recharging;
+    public Action RechargingEnded;
 
     public bool IsActive { get; private set; }
     public float DurationActiveTime => _durationActiveTime;
@@ -76,7 +76,7 @@ public class Vamperism : MonoBehaviour
     {
         Recharging?.Invoke(rechargeDurationTime);
         yield return _waitForRechargeTime;
-        Ended?.Invoke();
+        RechargingEnded?.Invoke();
         IsActive = false;
     }
 

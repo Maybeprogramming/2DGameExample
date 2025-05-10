@@ -26,22 +26,22 @@ public class VamperismTimerShower : MonoBehaviour
     private void OnEnable()
     {
         _vamperism.Activated += OnActevated;
-        _vamperism.Ended += OnEnded;
         _vamperism.Recharging += OnRecharging;
+        _vamperism.RechargingEnded += OnRechargingEnded;
     }
 
     private void OnDisable()
     {
         _vamperism.Activated -= OnActevated;
-        _vamperism.Ended -= OnEnded;
         _vamperism.Recharging -= OnRecharging;
+        _vamperism.RechargingEnded -= OnRechargingEnded;
     }
 
-    private void OnEnded()
+    private void OnRechargingEnded()
     {
-        _timerTextArea.text = SetText(_vamperism.DurationActiveTime);
         _stateTextArea.text = _textNotActive;
         _pressKeyTextArea.text = _textPressKey;
+        _timerTextArea.text = SetText(_vamperism.DurationActiveTime);
     }
 
     private void OnRecharging(float rechargingTime)
