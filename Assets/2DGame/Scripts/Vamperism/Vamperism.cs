@@ -7,12 +7,11 @@ public class Vamperism : MonoBehaviour
 {
     [SerializeField] private PlayerInputController _input;
     [SerializeField] private Health _playerHealth;
+    [SerializeField] private EnemyDetector _enemyDetector;
     [SerializeField] private float _damage;
     [SerializeField] private float _hitsCount;
     [SerializeField] private float _durationActiveTime;
     [SerializeField] private float _durationRechargeTime;
-    [SerializeField] private float _radiusAction;
-    [SerializeField] private Transform _vamperismPosition;
 
     private WaitForSeconds _waitForRechargeTime;
 
@@ -34,9 +33,6 @@ public class Vamperism : MonoBehaviour
 
     private void OnDisable() =>
         _input.VamperismActivated -= OnVamperismActevated;
-
-    private void OnDrawGizmos() =>
-        Gizmos.DrawWireSphere(_vamperismPosition.position, _radiusAction);
 
     private void OnVamperismActevated()
     {
@@ -86,26 +82,10 @@ public class Vamperism : MonoBehaviour
 
     private void ApplyDamage()
     {
-        Collider2D[] colliders = GetEnemyColliders();        ;
-        DamagingNearestEnemy(GetEnemiesHealth(colliders));
-    }
-
-    private void DamagingNearestEnemy(Health[] enemiesHealth)
-    {
-        if (enemiesHealth.Count() > 0)
+        if (_enemyDetector.TryGetEnemyHealth(out Health enemyHealth))
         {
-            Health enemyHealth = enemiesHealth?.OrderBy(healthEnemy =>
-                (healthEnemy.transform.position - transform.position).sqrMagnitude).First();
-
             enemyHealth?.Remove(_damage);
             _playerHealth.Add(_damage);
         }
     }
-
-    private static Health[] GetEnemiesHealth(Collider2D[] colliders) =>
-        colliders.Select(collider => collider.GetComponent<Health>()).ToArray();
-
-    private Collider2D[] GetEnemyColliders() =>
-        Physics2D.OverlapCircleAll(_vamperismPosition.position, _radiusAction).
-            Where(collider => collider.TryGetComponent<Enemy>(out Enemy enemy)).ToArray();
 }
