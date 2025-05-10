@@ -5,7 +5,7 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float _healthPoint;
 
-    public Action<float> Chanched;
+    public Action<float> Changed;
     public Action<float> Added;
     public Action<float> Removed;
     public Action Dead;
@@ -19,7 +19,7 @@ public class Health : MonoBehaviour
             _healthPoint = Mathf.Clamp(_healthPoint - value, 0, _healthPoint);
 
             Removed?.Invoke(value);
-            Chanched?.Invoke(Value);
+            Changed?.Invoke(Value);
         }
 
         OnDead();
@@ -31,7 +31,7 @@ public class Health : MonoBehaviour
             _healthPoint += value;
 
         Added?.Invoke(Value);
-        Chanched?.Invoke(Value);
+        Changed?.Invoke(Value);
     }
 
     private void OnDead()

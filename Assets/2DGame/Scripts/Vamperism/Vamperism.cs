@@ -13,6 +13,7 @@ public class Vamperism : MonoBehaviour
     [SerializeField] private float _durationRechargeTime;
 
     private WaitForSeconds _waitForRechargeTime;
+    private WaitForSeconds _waitTimeToNextDamage;
 
     public Action<float> Activated;
     public Action Ended;
@@ -26,6 +27,10 @@ public class Vamperism : MonoBehaviour
     {
         IsActive = false;
         _waitForRechargeTime = new WaitForSeconds(_durationRechargeTime);
+
+        float timeRanges = _hitsCount - 1;
+        float timeBetweenHits = _durationActiveTime / timeRanges;
+        _waitTimeToNextDamage = new WaitForSeconds(timeBetweenHits);
     }
 
     private void OnEnable() =>
@@ -45,28 +50,14 @@ public class Vamperism : MonoBehaviour
 
     private IEnumerator VamperismActivating()
     {
-        float elapsedTime = 0;
-        float timeRanges = _hitsCount - 1;
-        float timeBetweenHits = _durationActiveTime / timeRanges;
         int currentHitsCount = 0;
-        float timeDurationOffset = 0.01f;
-
         Activated?.Invoke(_durationActiveTime);
 
-        while (elapsedTime < _durationActiveTime + timeDurationOffset)
+        while (currentHitsCount < _hitsCount)
         {
-            bool canDamage = timeBetweenHits * currentHitsCount - elapsedTime <= 0f;
-
-            if (canDamage)
-            {
-                Debug.Log($"Hit - {currentHitsCount + 1}, {string.Format("Калькуляция: {0:f4}", timeBetweenHits * currentHitsCount - elapsedTime)}");
-                ApplyDamage();
-                currentHitsCount++;
-
-            }
-
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            ApplyDamage();
+            currentHitsCount++;
+            yield return _waitTimeToNextDamage;
         }
 
         Ended?.Invoke();

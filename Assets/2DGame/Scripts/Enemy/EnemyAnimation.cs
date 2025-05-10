@@ -12,12 +12,12 @@ public class EnemyAnimation : MonoBehaviour
 
     private void OnEnable()
     {
-        _health.Chanched += OnTakeDamage;
+        _health.Changed += OnTakeDamage;
     }
 
     private void OnDisable()
     {
-        _health.Chanched -= OnTakeDamage;
+        _health.Changed -= OnTakeDamage;
     }
 
     private void OnTakeDamage(float damage)
