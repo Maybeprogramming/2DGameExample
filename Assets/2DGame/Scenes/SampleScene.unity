@@ -3978,7 +3978,7 @@ MonoBehaviour:
   _slider: {fileID: 559986640}
   _health: {fileID: 2042310912}
   _textHealth: {fileID: 677725477}
-  _smoothDurationTime: 1
+  _smoothDurationTime: 0.5
 --- !u!114 &478728421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19955,7 +19955,7 @@ MonoBehaviour:
   _slider: {fileID: 2014973048}
   _health: {fileID: 387745512}
   _textHealth: {fileID: 1836589089}
-  _smoothDurationTime: 1
+  _smoothDurationTime: 0.5
 --- !u!114 &1297937183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20475,7 +20475,7 @@ MonoBehaviour:
   _slider: {fileID: 2005351830}
   _health: {fileID: 584781509}
   _textHealth: {fileID: 313879859}
-  _smoothDurationTime: 1
+  _smoothDurationTime: 0.5
 --- !u!114 &1367034468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22728,7 +22728,7 @@ MonoBehaviour:
   _slider: {fileID: 1920256701}
   _health: {fileID: 2146776903}
   _textHealth: {fileID: 1943551376}
-  _smoothDurationTime: 1
+  _smoothDurationTime: 0.5
 --- !u!1 &1770425501
 GameObject:
   m_ObjectHideFlags: 0
