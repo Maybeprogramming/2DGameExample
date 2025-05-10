@@ -49,16 +49,17 @@ public class Vamperism : MonoBehaviour
         float timeRanges = _hitsCount - 1;
         float timeBetweenHits = _durationActiveTime / timeRanges;
         int currentHitsCount = 0;
+        float timeDurationOffset = 0.01f;
 
         Activated?.Invoke(_durationActiveTime);
 
-        while (elapsedTime < _durationActiveTime + 0.01f)
+        while (elapsedTime < _durationActiveTime + timeDurationOffset)
         {
             bool canDamage = timeBetweenHits * currentHitsCount - elapsedTime <= 0f;
 
             if (canDamage)
             {
-                Debug.Log($"Hit - {currentHitsCount + 1}, {string.Format("Время {0:f4}", timeBetweenHits * currentHitsCount - elapsedTime)}");
+                Debug.Log($"Hit - {currentHitsCount + 1}, {string.Format("Калькуляция: {0:f4}", timeBetweenHits * currentHitsCount - elapsedTime)}");
                 ApplyDamage();
                 currentHitsCount++;
 
