@@ -5,6 +5,7 @@ public class EnemyDetector : MonoBehaviour
 {
     [SerializeField] private float _radiusAction;
     [SerializeField] private Transform _vamperismPosition;
+    [SerializeField] private LayerMask _layerMask;
 
     private void OnDrawGizmos() =>
         Gizmos.DrawWireSphere(_vamperismPosition.position, _radiusAction);
@@ -30,6 +31,6 @@ public class EnemyDetector : MonoBehaviour
        colliders.Select(collider => collider.GetComponent<Health>()).ToArray();
 
     private Collider2D[] GetEnemyColliders() =>
-     Physics2D.OverlapCircleAll(_vamperismPosition.position, _radiusAction).
+     Physics2D.OverlapCircleAll(_vamperismPosition.position, _radiusAction, _layerMask).
          Where(collider => collider.TryGetComponent<Enemy>(out Enemy enemy)).ToArray();
 }

@@ -5423,6 +5423,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
       insertIndex: -1
       addedObject: {fileID: 637326964}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 637326965}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 637326966}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
 --- !u!212 &637326961 stripped
 SpriteRenderer:
@@ -5462,6 +5468,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _radiusAction: 13.6
   _vamperismPosition: {fileID: 637326962}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+--- !u!58 &637326965
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50450884}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 31863
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 2.5
+--- !u!114 &637326966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50450884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22360e90ee313844c807570b21f0fff6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &651955177
 GameObject:
   m_ObjectHideFlags: 0
@@ -35956,7 +36012,7 @@ MonoBehaviour:
   _radiusDetectorEnemy: 1.5
   _enemyMask:
     serializedVersion: 2
-    m_Bits: 4224
+    m_Bits: 128
   _damage: 2
   _damageHeavy: 4
 --- !u!114 &2146776905
