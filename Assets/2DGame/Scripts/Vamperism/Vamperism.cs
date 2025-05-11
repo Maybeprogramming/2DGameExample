@@ -6,7 +6,6 @@ public class Vamperism : MonoBehaviour
 {
     [SerializeField] private PlayerInputController _input;
     [SerializeField] private Health _playerHealth;
-    [SerializeField] private EnemyDetectorByOverlap _enemyDetectorByOverlap;
     [SerializeField] private EnemyDetectorByLayerMask _enemyDetectorByLayerMask;
     [SerializeField] private float _damage;
     [SerializeField] private float _hitsCount;
