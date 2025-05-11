@@ -5422,9 +5422,6 @@ PrefabInstance:
       addedObject: {fileID: 637326963}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 637326964}
-    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 637326965}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: d1551a733d9890a49aa50a615f58c6de, type: 3}
       insertIndex: -1
@@ -5454,23 +5451,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _vamperism: {fileID: 2146776909}
   _spriteRenderer: {fileID: 637326961}
---- !u!114 &637326964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50450884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7803470aeb68e7c44a2412fd726f0ca8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _radiusAction: 13.6
-  _vamperismPosition: {fileID: 637326962}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 128
 --- !u!58 &637326965
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -27,7 +27,8 @@ public class EnemyDetectorByLayerMask : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _colliders.Remove(collision);
+        if (_colliders.Contains(collision))
+            _colliders.Remove(collision);
     }
 
     public bool TryGetNearestEnemyHealth(out Health enemyHealth)
