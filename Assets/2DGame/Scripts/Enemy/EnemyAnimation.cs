@@ -20,7 +20,7 @@ public class EnemyAnimation : MonoBehaviour
         _health.Changed -= OnTakeDamage;
     }
 
-    private void OnTakeDamage(float damage)
+    private void OnTakeDamage(float damage, TypeVariableChanging type)
     {
         if (_health.IsAlive)
             _animator.SetTrigger(TakeDamage);

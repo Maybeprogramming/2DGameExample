@@ -5,33 +5,33 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float _healthPoint;
 
-    public Action<float> Changed;
+    public Action<float, TypeVariableChanging> Changed;
     public Action<float> Added;
     public Action<float> Removed;
     public Action Dead;
     public bool IsAlive => _healthPoint > 0;
     public float Value => _healthPoint;
 
-    public void Remove(float value)
+    public void Remove(float value, TypeVariableChanging type = TypeVariableChanging.Instant)
     {
         if (value > 0 && IsAlive)
         {
             _healthPoint = Mathf.Clamp(_healthPoint - value, 0, _healthPoint);
 
             Removed?.Invoke(value);
-            Changed?.Invoke(Value);
+            Changed?.Invoke(Value, type);
         }
 
         OnDead();
     }
 
-    public void Add(float value)
+    public void Add(float value, TypeVariableChanging type = TypeVariableChanging.Instant)
     {
         if (value > 0 && IsAlive)
             _healthPoint += value;
 
         Added?.Invoke(Value);
-        Changed?.Invoke(Value);
+        Changed?.Invoke(Value, type);
     }
 
     private void OnDead()

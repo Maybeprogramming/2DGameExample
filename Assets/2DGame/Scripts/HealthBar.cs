@@ -16,24 +16,38 @@ public class HealthBar : MonoBehaviour
     {
         _maxHealth = _health.Value;
         _slider.value = _slider.maxValue;
-        _textHealth.text = _health.Value.ToString();
+        _textHealth.text = GetFormatValue(_health.Value);
     }
 
-    private void OnEnable() =>    
-        _health.Changed += OnValueChanching;            
+    private void OnEnable() =>
+        _health.Changed += OnValueChanching;
 
-    private void OnDisable() =>    
+    private void OnDisable() =>
         _health.Changed -= OnValueChanching;
 
-    private void OnValueChanching(float value) => 
-        SetCurrentValue(value);
+    private void OnValueChanching(float value, TypeVariableChanging type) =>
+        SetCurrentValue(value, type);
 
-    private void SetCurrentValue(float value)
+    private void SetCurrentValue(float value, TypeVariableChanging type)
     {
         if (value > _maxHealth)
             _maxHealth = value;
 
-        StartCoroutine(HealthSmothing(value));
+        switch (type)
+        {
+            case TypeVariableChanging.Instant:
+                HealthInstantChanging(value);
+                break;
+            case TypeVariableChanging.Periodic:
+                StartCoroutine(HealthSmothing(value));
+                break;
+        }
+    }
+
+    private void HealthInstantChanging(float currentValue)
+    {
+        _slider.value = currentValue / _maxHealth;
+        _textHealth.text = GetFormatValue(currentValue);
     }
 
     private IEnumerator HealthSmothing(float targetValue)
@@ -53,5 +67,10 @@ public class HealthBar : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private string GetFormatValue(float value)
+    {
+        return string.Format("{0:f1}", value);
     }
 }

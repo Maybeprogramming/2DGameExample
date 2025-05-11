@@ -76,8 +76,8 @@ public class Vamperism : MonoBehaviour
     {
         if (_enemyDetector.TryGetEnemyHealth(out Health enemyHealth))
         {
-            enemyHealth?.Remove(_damage);
-            _playerHealth.Add(_damage);
+            enemyHealth?.Remove(_damage, TypeVariableChanging.Periodic);
+            _playerHealth.Add(_damage, TypeVariableChanging.Periodic);
         }
     }
 }
