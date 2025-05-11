@@ -5518,6 +5518,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22360e90ee313844c807570b21f0fff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _enemyLayer: 0
+  _collider: []
 --- !u!1 &651955177
 GameObject:
   m_ObjectHideFlags: 0
