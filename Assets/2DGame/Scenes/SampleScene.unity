@@ -5486,7 +5486,7 @@ CircleCollider2D:
     m_Bits: 128
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 31863
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -5518,11 +5518,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22360e90ee313844c807570b21f0fff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyMask:
+  _collisionMask:
     serializedVersion: 2
     m_Bits: 128
-  _enemyLayer: 0
-  _collider: []
+  _colliders: []
 --- !u!1 &651955177
 GameObject:
   m_ObjectHideFlags: 0
@@ -36087,7 +36086,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _input: {fileID: 1534937098}
   _playerHealth: {fileID: 2146776903}
-  _enemyDetector: {fileID: 637326964}
+  _enemyDetectorByOverlap: {fileID: 637326964}
+  _enemyDetectorByLayerMask: {fileID: 637326966}
   _damage: 0.5
   _hitsCount: 12
   _durationActiveTime: 6

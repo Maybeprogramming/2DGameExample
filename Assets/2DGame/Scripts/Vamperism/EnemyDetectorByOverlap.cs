@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-public class EnemyDetector : MonoBehaviour
+public class EnemyDetectorByOverlap : MonoBehaviour
 {
     [SerializeField] private float _radiusAction;
     [SerializeField] private Transform _vamperismPosition;
@@ -10,7 +10,7 @@ public class EnemyDetector : MonoBehaviour
     private void OnDrawGizmos() =>
         Gizmos.DrawWireSphere(_vamperismPosition.position, _radiusAction);
 
-    public bool TryGetEnemyHealth(out Health enemyHealth)
+    public bool TryGetNearestEnemyHealth(out Health enemyHealth)
     {
         Collider2D[] colliders = GetEnemyColliders();
         Health[] enemiesHealth = GetEnemiesHealth(colliders);

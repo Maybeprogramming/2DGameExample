@@ -6,7 +6,8 @@ public class Vamperism : MonoBehaviour
 {
     [SerializeField] private PlayerInputController _input;
     [SerializeField] private Health _playerHealth;
-    [SerializeField] private EnemyDetector _enemyDetector;
+    [SerializeField] private EnemyDetectorByOverlap _enemyDetectorByOverlap;
+    [SerializeField] private EnemyDetectorByLayerMask _enemyDetectorByLayerMask;
     [SerializeField] private float _damage;
     [SerializeField] private float _hitsCount;
     [SerializeField] private float _durationActiveTime;
@@ -15,10 +16,10 @@ public class Vamperism : MonoBehaviour
     private WaitForSeconds _waitForRechargeTime;
     private WaitForSeconds _waitTimeToNextDamage;
 
-    public Action<float> Activated;
-    public Action Ended;
-    public Action<float> Recharging;
-    public Action RechargingEnded;
+    public event Action<float> Activated;
+    public event Action Ended;
+    public event Action<float> Recharging;
+    public event Action RechargingEnded;
 
     public bool IsActive { get; private set; }
     public float DurationActiveTime => _durationActiveTime;
@@ -74,9 +75,9 @@ public class Vamperism : MonoBehaviour
 
     private void ApplyDamage()
     {
-        if (_enemyDetector.TryGetEnemyHealth(out Health enemyHealth))
+        if (_enemyDetectorByLayerMask.TryGetNearestEnemyHealth(out Health enemyHealth))
         {
-            enemyHealth?.Remove(_damage, TypeVariableChanging.Periodic);
+            enemyHealth.Remove(_damage, TypeVariableChanging.Periodic);
             _playerHealth.Add(_damage, TypeVariableChanging.Periodic);
         }
     }

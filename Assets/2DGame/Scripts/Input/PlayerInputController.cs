@@ -8,10 +8,10 @@ public class PlayerInputController : MonoBehaviour
     
     public Vector2 Direction { get; private set; }
 
-    public Action Attacked;
-    public Action HeavyAttacked;
-    public Action<InputAction.CallbackContext> Jumped;
-    public Action VamperismActivated;
+    public event Action Attacked;
+    public event Action HeavyAttacked;
+    public event Action<InputAction.CallbackContext> Jumped;
+    public event Action VamperismActivated;
 
     private void Awake()
     {

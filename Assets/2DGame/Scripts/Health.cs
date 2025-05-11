@@ -5,10 +5,10 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float _healthPoint;
 
-    public Action<float, TypeVariableChanging> Changed;
-    public Action<float> Added;
-    public Action<float> Removed;
-    public Action Dead;
+    public event Action<float, TypeVariableChanging> Changed;
+    public event Action<float> Added;
+    public event Action<float> Removed;
+    public event Action Dead;
     public bool IsAlive => _healthPoint > 0;
     public float Value => _healthPoint;
 

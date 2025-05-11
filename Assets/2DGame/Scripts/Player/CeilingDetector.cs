@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CeilingDetector : MonoBehaviour
 {
-    public Action Detected;
+    public event Action Detected;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
